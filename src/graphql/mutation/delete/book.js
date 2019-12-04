@@ -7,7 +7,7 @@ var bookModel = require('../../../mongodb/schema/book');
 var bookType = require('../../type/book');
 
 
-exports.remove = {
+exports.removeBook = {
   type: bookType.bookType,
   args: {
     id: {

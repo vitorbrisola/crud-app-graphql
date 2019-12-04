@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +13,8 @@
   "dependencies": {
     "express": "^4.16.4",
     "express-graphql": "^0.6.12",
-    "graphql": "^14.0.2",
-    "mongoose": "^5.3.5"
+    "graphql": "^0.13.2",
+    "mongoose": "^5.7.13",
+    "nodemon": "^2.0.1"
   }
 }

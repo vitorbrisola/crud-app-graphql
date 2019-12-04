@@ -2,16 +2,16 @@
 FROM node:latest
 
 #create a working directory
-WORKDIR /usr/src/app/graphqlApp
+WORKDIR /usr/app
 
 #copy package.json file under the working directory 
-COPY package.json /usr/src/app/graphqlApp/
+COPY package*.json ./
 
 # install all the dependencies 
-RUN npm install
+RUN npm install --no-optional
 
 #copy all your files under the working directory
-COPY . /usr/src/graphqlApp
+COPY . .
 
 #expose the port 4000
 EXPOSE 4000
