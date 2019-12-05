@@ -2,7 +2,7 @@ version: "2"
 
 services:
   #define a service called app
-  app:
+  api:
     #adding a container name
     container_name: graphqlapp
     #restart the container automatically if it fails

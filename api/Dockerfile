@@ -2,14 +2,14 @@
 FROM node:latest
 
 #create a working directory
-WORKDIR /usr/app
+WORKDIR /usr/app/api
 
 #copy package.json file under the working directory 
 COPY package*.json ./
 
 # install all the dependencies 
 RUN npm install --no-optional
-
+ 
 #copy all your files under the working directory
 COPY . .
 
