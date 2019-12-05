@@ -3,10 +3,10 @@ const app = express()
 const mongoose = require('mongoose');
 // import graphql-express and BookSchema
 const graphqlExpress = require("express-graphql");
-const bookSchema = require('./src/graphql/schema/book').BookSchema;
+const QuestSchema = require('./question/graphql/schema').Schema;
 
 //connecting to mongodb
-mongoose.connect('mongodb://mongo/myappdb',(err)=>{
+mongoose.connect('mongodb://mongo/myappdb', { useNewUrlParser: true,useUnifiedTopology: true },(err)=>{
     if (err) throw err;
     console.log("connected to mongo");
 })  
@@ -17,9 +17,11 @@ app.listen(app.get('port'), ()=> {
     console.log("Node app is running at localhost:" + app.get('port'))
 });
 
+console.log("Is watching changes Hehe")
+
 //add the schema to graphql-express 
 app.use('/graphql', graphqlExpress({
-    schema: bookSchema,
+    schema: QuestSchema,
     rootValue: global,
     graphiql: true
 }));
