@@ -2,7 +2,7 @@ var GraphQLObjectType = require('graphql').GraphQLObjectType;
 var GraphQLList = require('graphql').GraphQLList;
 
 //import book model 
-var QuestModel = require('../mongodb/schema').Model;
+var QuestModel = require('../mongodb/schema');
 //import GraphQL BookType
 var QuestType = require('./type').Type;
 

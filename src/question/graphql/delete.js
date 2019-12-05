@@ -2,7 +2,7 @@ var GraphQLNonNull = require('graphql').GraphQLNonNull;
 var GraphQLString = require('graphql').GraphQLString;
 
 
-var QuestModel = require('../mongodb/schema').Model;
+var QuestModel = require('../mongodb/schema');
 var QuestType = require('./type').Type;
 
 
