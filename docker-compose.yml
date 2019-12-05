@@ -8,10 +8,10 @@ services:
     #restart the container automatically if it fails
     restart: always
     #building the app image using the Dockerfile in the current directory
-    build: .
+    build: ./api
     #mapping the host port to the container port.
     volumes:
-      - ./src:/usr/app/src
+      - ./api/src:/usr/app/api/src
     ports:
       - "4000:4000"
     links:
