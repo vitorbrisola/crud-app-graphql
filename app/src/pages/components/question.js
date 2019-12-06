@@ -18,6 +18,7 @@ export default class GraphQLApp extends React.Component {
         `}
         variables={{}}
         render={({error, props}) => {
+	  console.log(`Questions: ${props.questions}`);
           if (error) {
 	    console.log(error);
             return <div>Erro: {error.message}</div>;
@@ -25,7 +26,7 @@ export default class GraphQLApp extends React.Component {
           if (!props) {
             return <div>Loading...</div>;
           }
-          return (<div><p>Question ID: {props.question.id}</p> <p>Description: {props.question.description}</p></div>);
+          return (<div><p>Question ID: {props.questions}</p> <p>Description:</p></div>);
         }}
       />
     );

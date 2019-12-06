@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 // import graphql-express and BookSchema
 const graphqlExpress = require("express-graphql");
 const QuestSchema = require('./question/graphql/schema').Schema;
+const cors = require('cors');	
 
 //connecting to mongodb
 mongoose.connect('mongodb://mongo/myappdb', { useNewUrlParser: true,useUnifiedTopology: true },(err)=>{
@@ -17,8 +18,9 @@ app.listen(app.get('port'), ()=> {
     console.log("Node app is running at localhost:" + app.get('port'))
 });
 
-console.log("Is watching changes Hehe")
+console.log("Is watching changes He")
 
+app.use(cors());
 //add the schema to graphql-express 
 app.use('/graphql', graphqlExpress({
     schema: QuestSchema,
