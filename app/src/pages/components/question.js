@@ -9,7 +9,7 @@ export default class GraphQLApp extends React.Component {
         environment={Environment}
         query={graphql`
           query questionQuery {
-            question {
+            questions {
               id
               description
             }  

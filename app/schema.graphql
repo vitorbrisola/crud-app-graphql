@@ -5,5 +5,5 @@ type question {
 }
 
 type Query {
-  question: question!
+  questions: [question!]!
 }
