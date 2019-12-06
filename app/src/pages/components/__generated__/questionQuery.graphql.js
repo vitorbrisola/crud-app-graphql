@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 067a08c186467dea92d35ece5590fcd3
+ * @relayHash 90a46ed0dfef519158e03dde0bdaea37
  */
 
 /* eslint-disable */
@@ -11,7 +11,7 @@
 import type { ConcreteRequest } from 'relay-runtime';
 export type questionQueryVariables = {||};
 export type questionQueryResponse = {|
-  +questions: $ReadOnlyArray<{|
+  +questions: ?$ReadOnlyArray<?{|
     +id: string,
     +description: string,
   |}>

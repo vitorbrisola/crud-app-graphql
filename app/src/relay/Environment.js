@@ -10,7 +10,7 @@ const store = new Store(source);
 
 const network = Network.create((operation, variables) => {
     return fetch(
-        'http://localhost:4000/graphql',
+        'http://172.17.0.1:4000/graphql',
         {
             method: 'POST',
             headers: {
