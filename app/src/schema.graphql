@@ -1,0 +1,9 @@
+
+type question {
+    id: ID!
+    description: String!
+}
+
+type Query {
+  question: question!
+}

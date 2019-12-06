@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import GraphQLApp from './components/question';
 
 export default class QuizPage extends Component {
 
@@ -7,6 +8,7 @@ export default class QuizPage extends Component {
         return (
             <div>
                 <h1>Quiz!</h1>
+                <GraphQLApp />
             </div>
         );
     }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import QuestCard from './components/questCard'
+import LinkList from '../relay/LinkList'
 
 
 const questions = [
@@ -30,6 +31,7 @@ export default class HomePage extends Component {
         return (
             <div>
                 <QuestCard data={questions}/>
+                <LinkList />
             </div>
         );
     } 
