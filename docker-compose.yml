@@ -2,19 +2,6 @@ version: "2"
 
 services:
 
-  app:
-    #adding a container name
-    container_name: graphqlapp
-    #restart the container automatically if it fails
-    restart: always
-    #building the app image using the Dockerfile in the current directory
-    build: ./app
-    #mapping the host port to the container port.
-    volumes:
-      - ./app/src:/usr/app/app/src
-    ports:
-      - "3000:3000"
-      
   #define a service called api
   api:
     #adding a container name

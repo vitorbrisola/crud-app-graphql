@@ -2,18 +2,25 @@ import React, {Component} from 'react';
 import { Card, Icon, Image } from 'semantic-ui-react'
 import './quest.css'
 
-const CardExampleFluid = () => (
-    <Card.Group>
-      <Card fluid color='red' header='Option 1' />
-      <Card fluid color='orange' header='Option 2' />
-      <Card fluid color='yellow' header='Option 3' />
-    </Card.Group>
-)
 
-const QuestCard = () => {
+const dataToCard = (data) => {
+    const cards = []
+    for(var question of data){
+        var newCard = {
+            header: 'Questão ',
+            fluid: true
+        }
+        newCard.header += question.id.toString();
+        newCard.description = question.description
+        cards.push(newCard)
+    }
+    return cards
+};
+
+const QuestCard = ({data}) => {
         return (
             <div className="qCard">
-                    <CardExampleFluid />
+                <Card.Group items={dataToCard(data)} />
             </div>
         );
 }; 
