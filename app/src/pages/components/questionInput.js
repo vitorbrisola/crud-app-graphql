@@ -1,18 +1,17 @@
 import React from 'react';
 import { Input } from 'semantic-ui-react';
 
-export default () => {
+export default (handleChange,handleClick) => {
     return (
             <Input 
                 fluid 
                 action={{
                     color: 'teal',
-                    labelPosition: 'right',
                     icon: 'check',
-                    content: 'Finalizar'
-                  }}
-                actionPosition='right'
-                icon='question' 
-                placeholder='Adicionar Questão...' />
+                    onClick: () => handleClick(),
+                }}
+                onChange={handleChange}
+                placeholder='Adicionar Questão...' 
+            />
     )
 };
