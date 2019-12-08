@@ -11,3 +11,7 @@ body {
     place-content: center;;
     color: white;
 }
+
+.qInput {
+    margin-top: 20px;
+}

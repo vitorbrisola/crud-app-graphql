@@ -23,9 +23,7 @@ const dataToCard = (data) => {
 const QuestCard = ({data}) => {
     if(data.length === 0){return <div>Loading ...</div>}
     return (
-        <div className="qCard">
-            <Card.Group items={dataToCard(data)} />
-        </div>
+        <Card.Group items={dataToCard(data)} />
     );
 }; 
 

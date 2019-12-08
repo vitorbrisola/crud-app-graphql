@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import QuestCard from './components/questCard';
+import QuestInput from './components/questionInput'
 import RelayQuery from '../relay/query';
-
+import './components/quest.css'
 
 
 export default class HomePage extends Component {
@@ -25,8 +26,9 @@ export default class HomePage extends Component {
     render(){
 
         return (
-            <div>
+            <div className="qCard">
                 <QuestCard data={this.state.questions}/>
+                <div className='qInput'><QuestInput /></div>
             </div>
         );
     } 
