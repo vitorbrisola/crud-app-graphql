@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import QuestCard from './components/questCard';
-import questions from '../data/mockQuestions';
 import RelayQuery from '../relay/query';
 
 

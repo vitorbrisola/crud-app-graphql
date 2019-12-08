@@ -1,15 +1,9 @@
 import {fetchQuery} from 'relay-runtime';
-import graphql from "babel-plugin-relay/macro";
-import environment from './Environment';
 
-const query = graphql`
-    query queryQuery {
-      questions {
-        id
-        description
-      }  
-    }
-`;
+
+import environment from './Environment';
+import {query} from './schemas/questions'
+
 
 const variables = {
   pageID: '110798995619330',
