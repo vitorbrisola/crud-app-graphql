@@ -1,28 +1,32 @@
-import React, {Component} from 'react';
-import { Card, Icon, Image } from 'semantic-ui-react'
+import React from 'react';
+import { Card} from 'semantic-ui-react'
 import './quest.css'
 
 
 const dataToCard = (data) => {
     const cards = []
-    for(var question of data){
+    for(var [i,question] of data.entries()){
+        // default card layout
         var newCard = {
             header: 'Questão ',
             fluid: true
         }
-        newCard.header += question.id.toString();
+        // data extraction
+        newCard.header += (i+1).toString();
         newCard.description = question.description
+        
         cards.push(newCard)
     }
     return cards
 };
 
 const QuestCard = ({data}) => {
-        return (
-            <div className="qCard">
-                <Card.Group items={dataToCard(data)} />
-            </div>
-        );
+    if(data.length === 0){return <div>Loading ...</div>}
+    return (
+        <div className="qCard">
+            <Card.Group items={dataToCard(data)} />
+        </div>
+    );
 }; 
 
 export default QuestCard;

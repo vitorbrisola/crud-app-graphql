@@ -28,7 +28,12 @@ export default class GraphQLApp extends React.Component {
           if (props) {
             console.log(props.questions);
             const questList = props.questions;
-            return (<div><p>Question ID: {questList[0].id}</p> <p>Description: {questList[0].description}</p></div>);
+            return (
+              <div>
+                <p>Question ID: {questList[0].id}</p> 
+                <p>Description: {questList[0].description}</p>
+              </div>
+            );
           }
           return <div>Loading...</div>;
         }}

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash cc1608afad5552407d2501a456cc2299
+ * @relayHash 50e1b0cba203acb9badf8568df65d805
  */
 
 /* eslint-disable */
@@ -9,22 +9,22 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type questionQueryVariables = {||};
-export type questionQueryResponse = {|
+export type queryQueryVariables = {||};
+export type queryQueryResponse = {|
   +questions: ?$ReadOnlyArray<?{|
     +id: string,
     +description: ?string,
   |}>
 |};
-export type questionQuery = {|
-  variables: questionQueryVariables,
-  response: questionQueryResponse,
+export type queryQuery = {|
+  variables: queryQueryVariables,
+  response: queryQueryResponse,
 |};
 */
 
 
 /*
-query questionQuery {
+query queryQuery {
   questions {
     id
     description
@@ -64,7 +64,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "questionQuery",
+    "name": "queryQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -72,19 +72,19 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "questionQuery",
+    "name": "queryQuery",
     "argumentDefinitions": [],
     "selections": (v0/*: any*/)
   },
   "params": {
     "operationKind": "query",
-    "name": "questionQuery",
+    "name": "queryQuery",
     "id": null,
-    "text": "query questionQuery {\n  questions {\n    id\n    description\n  }\n}\n",
+    "text": "query queryQuery {\n  questions {\n    id\n    description\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'b99ebbadf0e7bf9761fea63656e1ea05';
+(node/*: any*/).hash = 'c9a2830d6bac0363a6633853ba9f6e93';
 module.exports = node;

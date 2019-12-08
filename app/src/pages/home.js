@@ -1,37 +1,33 @@
 import React, {Component} from 'react';
-import QuestCard from './components/questCard'
-import LinkList from '../relay/LinkList'
+import QuestCard from './components/questCard';
+import questions from '../data/mockQuestions';
+import RelayQuery from '../relay/query';
 
 
-const questions = [
-    {
-        id: 1,
-        description:
-        'Leverage agile frameworks to provide a robust synopsis for high level overviews.',
-    },{
-        id: 2,
-        description:
-        'Bring to the table win-win survival strategies to ensure proactive domination.',
-    },{
-        id: 3,
-        description:
-        'Capitalise on low hanging fruit to identify a ballpark value added activity to beta test.',
-    },{
-        id: 4,
-        description:
-        'Capitalise on low hanging fruit to identify a ballpark value added activity to beta test.',
-    }
-]
 
 export default class HomePage extends Component {
 
+    state = {
+        questions: []
+    }
 
+    componentDidMount() {
+        this.loadData()
+    }
+
+    loadData = async () =>{
+        await RelayQuery()
+            .then(data => {
+                this.setState({questions: data.questions});
+            })
+            .catch(err => console.log(err.message))
+    }
 
     render(){
+
         return (
             <div>
-                <QuestCard data={questions}/>
-                <LinkList />
+                <QuestCard data={this.state.questions}/>
             </div>
         );
     } 
