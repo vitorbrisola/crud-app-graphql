@@ -1,7 +1,7 @@
 
 type question {
             id: ID!
-            description: String!
+            description: String
 }
 
 

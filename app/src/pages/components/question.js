@@ -3,6 +3,8 @@ import { QueryRenderer} from 'react-relay';
 import Environment from '../../relay/Environment'; 
 import graphql from "babel-plugin-relay/macro";
 
+
+
 export default class GraphQLApp extends React.Component {
   render() {
     return (
@@ -18,15 +20,17 @@ export default class GraphQLApp extends React.Component {
         `}
         variables={{}}
         render={({error, props}) => {
-	  console.log(`Questions: ${props.questions}`);
+	        
           if (error) {
-	    console.log(error);
+	          console.log(error);
             return <div>Erro: {error.message}</div>;
           }
-          if (!props) {
-            return <div>Loading...</div>;
+          if (props) {
+            console.log(props.questions);
+            const questList = props.questions;
+            return (<div><p>Question ID: {questList[0].id}</p> <p>Description: {questList[0].description}</p></div>);
           }
-          return (<div><p>Question ID: {props.questions}</p> <p>Description:</p></div>);
+          return <div>Loading...</div>;
         }}
       />
     );
