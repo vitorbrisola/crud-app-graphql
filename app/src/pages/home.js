@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import QuestCard from './components/questCard';
 import QuestionsQuery from '../relay/queries/questions';
 import './components/quest.css'
-import { Input } from 'semantic-ui-react';
 import addQuestion from '../relay/mutations/addQuestion'
-
+import QuestionInput from './components/questionInput'
 
 export default class HomePage extends Component {
 
@@ -37,22 +36,17 @@ export default class HomePage extends Component {
             .catch( err => console.log(err))
     }
 
+    addNewQuestionLocally = (newQuestion) => {
+        console.log('parent: '+newQuestion )
+    }
+
     render(){
 
         return (
             <div className="qCard">
                 <QuestCard data={this.state.questions}/>
                 <div className='qInput'>
-                    <Input 
-                        fluid 
-                        action={{
-                            color: 'teal',
-                            icon: 'check',
-                            onClick: () => this.handleQuestionInput(),
-                        }}
-                        onChange={this.handleQuestionText}
-                        placeholder='Adicionar Questão...' 
-                    />
+                    <QuestionInput click={this.addNewQuestionLocally} change={this.handleQuestionText} />    
                 </div>
             </div>
         );

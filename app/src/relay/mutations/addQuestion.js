@@ -25,8 +25,7 @@ const addQuestion = (description) => {
           mutation,
           variables,
           onError: (err) => {console.log(err)},
-        }
-      )
+        })
         .then(res => resolve(res))
         .catch(err => reject(err));
     })  
