@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8e4f6f720c92289fc1866f8f84bdc043
+ * @relayHash 75e3526dd143316aff4f23e7cfe3d5df
  */
 
 /* eslint-disable */
@@ -40,7 +40,7 @@ var v0 = [
     "name": "questions",
     "storageKey": null,
     "args": null,
-    "concreteType": "question",
+    "concreteType": "Question",
     "plural": true,
     "selections": [
       {

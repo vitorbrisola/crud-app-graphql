@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import QuestCard from './components/questCard';
-import QuestInput from './components/questionInput'
-import RelayQuery from '../relay/query';
+import QuestionsQuery from '../relay/queries/questions';
 import './components/quest.css'
 import { Input } from 'semantic-ui-react';
+import addQuestion from '../relay/mutations/addQuestion'
 
 
 export default class HomePage extends Component {
@@ -18,7 +18,7 @@ export default class HomePage extends Component {
     }
 
     loadData = async () =>{
-        await RelayQuery()
+        await QuestionsQuery()
             .then(data => {
                 this.setState({questions: data.questions});
             })
@@ -29,8 +29,12 @@ export default class HomePage extends Component {
         this.setState({questionAdd: e.target.value})
     }
 
-    handleQuestionInput = () => {
+    handleQuestionInput = async () => {
         console.log(this.state.questionAdd)
+        //const callback = (res) => {console.log(res)}
+        await addQuestion(this.state.questionAdd)
+            .then( res => console.log(res))
+            .catch( err => console.log(err))
     }
 
     render(){
