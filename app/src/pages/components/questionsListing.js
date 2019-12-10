@@ -1,7 +1,28 @@
 import React, {Component} from 'react';
-import { Card} from 'semantic-ui-react'
+import {Card, Button} from 'semantic-ui-react'
 import './quest.css'
 
+
+class QCard {
+
+    constructor(id,description) {
+        this.id = id;
+        this.card = {
+            header: 'Questãoo '+id.toString(),
+            fluid: true,
+            description: description,
+            extra: (<Button icon='trash' color='red' onClick={this.onDeleteClick} />)
+        }
+    }
+
+    onDeleteClick = () => {
+        console.log('hi '+this.id)
+    }
+
+    get = () => {
+        return this.card;
+    }
+}
 
 export default class QuestionsList extends Component {
 
@@ -12,55 +33,22 @@ export default class QuestionsList extends Component {
         };
     }
 
-    componentDidMount(){
-        console.log(this.props.data)
-        this.loadData()
-    }
-
-    loadData = () => {
-        this.setState({questionsList: this.props.data })
-    }
-
-
     cardsLayout = (data) => {
         const cards = []
         for(var [i,question] of data.entries()){
-            // default card layout
-            var newCard = {
-                header: 'Questão ',
-                fluid: true
-            }
-            // data extraction
-            newCard.header += (i+1).toString();
-            newCard.description = question.description
-            
-            cards.push(newCard)
+            var card = new QCard((i+1),question.description)
+            cards.push(card.get())
         }
         return cards
     }
 
+
     render () {
         if(this.props.getData() === 0){return <div>Nenhuma questão Encontrada!</div>}
         return (
-            <Card.Group items={this.cardsLayout(this.props.getData()    )} />
+            <Card.Group items={this.cardsLayout(this.props.getData())} />
         );
     }
 
 };
 
-const dataToCard = (data) => {
-    const cards = []
-    for(var [i,question] of data.entries()){
-        // default card layout
-        var newCard = {
-            header: 'Questão ',
-            fluid: true
-        }
-        // data extraction
-        newCard.header += (i+1).toString();
-        newCard.description = question.description
-        
-        cards.push(newCard)
-    }
-    return cards
-};
