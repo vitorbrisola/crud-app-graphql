@@ -4,10 +4,11 @@ import './components/quest.css'
 
 
 import QuestionInput from './components/questionInput'
-import QuestionsList from './components/questionsListing'
+import QuestionsList from './components/question/list'
 
 import addQuestion from '../relay/mutations/addQuestion'
 import deleteQuestion from '../relay/mutations/deleteQuestion'
+
 
 export default class HomePage extends Component {
 
@@ -32,17 +33,6 @@ export default class HomePage extends Component {
             .catch(err => console.log(err.message))
     }
 
-    handleQuestionText = (e) => {
-        this.setState({questionAdd: e.target.value})
-    }
-
-    handleQuestionInput = async () => {
-        console.log(this.state.questionAdd)
-        //const callback = (res) => {console.log(res)}
-        await addQuestion(this.state.questionAdd)
-            .then( res => console.log(res))
-            .catch( err => console.log(err))
-    }
 
     addNewQuestionLocally = (newQuestion) => {
         console.log('parent: '+newQuestion )
@@ -67,9 +57,12 @@ export default class HomePage extends Component {
 
         return (
             <div className="qCard">
-                <QuestionsList getData={this.getQuestions} onDelete={this.onDeleteQuestion} />
+                <QuestionsList 
+                    data={this.getQuestions}
+                    onDelete={this.onDeleteQuestion}
+                />
                 <div className='qInput'>
-                    <QuestionInput click={this.addNewQuestionLocally} change={this.handleQuestionText} />    
+                    <QuestionInput />    
                 </div>
             </div>
         );

@@ -16,8 +16,6 @@ const addQuestion = async (description) => {
       input:description
     }
 
-    console.log(variables)
-
     return await new Promise((resolve, reject) => {
       commitMutation(
         environment,
