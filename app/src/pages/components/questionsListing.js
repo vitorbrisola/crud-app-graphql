@@ -7,22 +7,42 @@ export default class QuestionsList extends Component {
 
     constructor(props){
         super(props)
-
         this.state = {
-            questions: []
+            questionsList: []
         };
-
-        this.loadData();
     }
 
-    loadData() {
-        this.setState({questions: this.props.questions})
+    componentDidMount(){
+        console.log(this.props.data)
+        this.loadData()
+    }
+
+    loadData = () => {
+        this.setState({questionsList: this.props.data })
+    }
+
+
+    cardsLayout = (data) => {
+        const cards = []
+        for(var [i,question] of data.entries()){
+            // default card layout
+            var newCard = {
+                header: 'Questão ',
+                fluid: true
+            }
+            // data extraction
+            newCard.header += (i+1).toString();
+            newCard.description = question.description
+            
+            cards.push(newCard)
+        }
+        return cards
     }
 
     render () {
-        if(questions.length === 0){return <div>Nenhuma questão Encontrada!</div>}
+        if(this.props.getData() === 0){return <div>Nenhuma questão Encontrada!</div>}
         return (
-            <Card.Group items={dataToCard(questions)} />
+            <Card.Group items={this.cardsLayout(this.props.getData()    )} />
         );
     }
 

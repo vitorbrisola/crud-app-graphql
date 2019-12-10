@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import QuestCard from './components/questCard';
 import QuestionsQuery from '../relay/queries/questions';
 import './components/quest.css'
 import addQuestion from '../relay/mutations/addQuestion'
 import QuestionInput from './components/questionInput'
+import QuestionsList from './components/questionsListing'
 
 export default class HomePage extends Component {
 
@@ -14,6 +14,10 @@ export default class HomePage extends Component {
 
     componentDidMount() {
         this.loadData()
+    }
+
+    getQuestions = () => {
+        return this.state.questions;
     }
 
     loadData = async () =>{
@@ -44,7 +48,7 @@ export default class HomePage extends Component {
 
         return (
             <div className="qCard">
-                <QuestCard data={this.state.questions}/>
+                <QuestionsList data={this.state.questions} getData={this.getQuestions}/>
                 <div className='qInput'>
                     <QuestionInput click={this.addNewQuestionLocally} change={this.handleQuestionText} />    
                 </div>
