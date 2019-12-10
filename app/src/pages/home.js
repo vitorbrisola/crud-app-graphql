@@ -44,11 +44,18 @@ export default class HomePage extends Component {
         console.log('parent: '+newQuestion )
     }
 
+    onDeleteQuestion = (id) => {
+        console.log('home :'+id);
+        var array = [...this.state.questions]
+        array.splice(id, 1);
+        this.setState({questions: array});
+    }
+
     render(){
 
         return (
             <div className="qCard">
-                <QuestionsList data={this.state.questions} getData={this.getQuestions}/>
+                <QuestionsList getData={this.getQuestions} onDelete={this.onDeleteQuestion} />
                 <div className='qInput'>
                     <QuestionInput click={this.addNewQuestionLocally} change={this.handleQuestionText} />    
                 </div>

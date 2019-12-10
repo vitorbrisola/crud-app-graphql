@@ -5,10 +5,11 @@ import './quest.css'
 
 class QCard {
 
-    constructor(id,description) {
+    constructor(id,description,onDelete) {
+        this.onDeleteCallback = onDelete;
         this.id = id;
         this.card = {
-            header: 'Questãoo '+id.toString(),
+            header: 'Questãoo '+(id+1).toString(),
             fluid: true,
             description: description,
             extra: (<Button icon='trash' color='red' onClick={this.onDeleteClick} />)
@@ -16,7 +17,7 @@ class QCard {
     }
 
     onDeleteClick = () => {
-        console.log('hi '+this.id)
+        this.onDeleteCallback(this.id)
     }
 
     get = () => {
@@ -32,11 +33,15 @@ export default class QuestionsList extends Component {
             questionsList: []
         };
     }
+    
+    onDeleteQuestion = (id) => {
+        this.props.onDelete(id)
+    }
 
     cardsLayout = (data) => {
         const cards = []
         for(var [i,question] of data.entries()){
-            var card = new QCard((i+1),question.description)
+            var card = new QCard(i,question.description,this.onDeleteQuestion)
             cards.push(card.get())
         }
         return cards
