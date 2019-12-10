@@ -2,16 +2,15 @@ var GraphQLObjectType = require('graphql').GraphQLObjectType;
 var GraphQLNonNull = require('graphql').GraphQLNonNull;
 var GraphQLID = require('graphql').GraphQLID;
 var GraphQLString = require('graphql').GraphQLString;
-var GraphQLList = require('graphql').GraphQLList;
-
+var GraphQLBoolean = require('graphql').GraphQLBoolean;
 
 exports.Type = new GraphQLObjectType({
-    name: 'question',
+    name: 'answer',
     fields:  () =>{
         return {
             id: {       type: new GraphQLNonNull(GraphQLID)     },      
-            description: {        type: GraphQLString      },  
-            answers: {        type: new GraphQLList(GraphQLString)     }        
+            text: {        type: GraphQLString      },  
+            isRight: {        type: GraphQLBoolean     },   
         }
     }
 });

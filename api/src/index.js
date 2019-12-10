@@ -3,7 +3,7 @@ const app = express()
 const mongoose = require('mongoose');
 // import graphql-express and BookSchema
 const graphqlExpress = require("express-graphql");
-const QuestSchema = require('./question/graphql/schema').Schema;
+const Schema = require('./schema').Schema;
 const cors = require('cors');	
 
 //connecting to mongodb
@@ -23,7 +23,7 @@ console.log("Is watching changes He")
 app.use(cors());
 //add the schema to graphql-express 
 app.use('/graphql', graphqlExpress({
-    schema: QuestSchema,
+    schema: Schema,
     rootValue: global,
     graphiql: true
 }));
