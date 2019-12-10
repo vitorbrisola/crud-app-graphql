@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import QuestionsQuery from '../relay/queries/questions';
 import './components/quest.css'
-import addQuestion from '../relay/mutations/addQuestion'
+
+
 import QuestionInput from './components/questionInput'
 import QuestionsList from './components/questionsListing'
+
+import addQuestion from '../relay/mutations/addQuestion'
+import deleteQuestion from '../relay/mutations/deleteQuestion'
 
 export default class HomePage extends Component {
 
@@ -44,11 +48,19 @@ export default class HomePage extends Component {
         console.log('parent: '+newQuestion )
     }
 
-    onDeleteQuestion = (id) => {
-        console.log('home :'+id);
+    onDeleteQuestion = async (index) => {
+        // getting id
+        const id = this.state.questions[index].id;
+        console.log('1: '+ id)
+
+        // deleting locally
         var array = [...this.state.questions]
-        array.splice(id, 1);
+        array.splice(index, 1);
         this.setState({questions: array});
+        console.log('2: '+ id)
+
+        // deleting from API
+        await deleteQuestion(id)
     }
 
     render(){
