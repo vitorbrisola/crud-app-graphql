@@ -11,23 +11,22 @@ const mutation = graphql`
 `;
 
 
-const addQuestion = (description) => {
+const addQuestion = async (description) => {
     const variables = {
       input:description
     }
 
     console.log(variables)
 
-    return new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
       commitMutation(
         environment,
         {
           mutation,
           variables,
+          onCompleted: (res) => {console.log(res)},
           onError: (err) => {console.log(err)},
         })
-        .then(res => resolve(res))
-        .catch(err => reject(err));
     })  
 } 
 

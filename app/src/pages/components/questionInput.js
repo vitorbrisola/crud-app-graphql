@@ -14,13 +14,9 @@ export default class QuestionInput extends Component{
 
     handleClick = async () => {
         //this.props.click();
-        console.log(this.state.question)
+        //console.log(this.state.question)
         await addQuestion(this.state.question)
-            .then( res => {
-                this.props.click(res);
-                //this.props.click(this.state.question);
-            })
-            .catch( err => console.log(err))
+            .then( res => console.log('Hoi: ' + res))
     }
 
     handleChange = (e) => {
