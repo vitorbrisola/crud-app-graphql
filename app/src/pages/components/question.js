@@ -59,7 +59,9 @@ export default class Question {
 
     delete = async () => {
         // delete question from server based on its id
-        await deleteQuestion(this.id)
+        if(this.isOnServer){
+            await deleteQuestion(this.id)
+        }
     }
 
     update = async (newDescription) => {
@@ -116,9 +118,6 @@ export default class Question {
                             this.editing=true
                             this.reRender()
                         }}/>
-                        <Button icon='trash' color='red' onClick={
-                            this.delete
-                        }/>
                     </div>
                     <Card
                         fluid

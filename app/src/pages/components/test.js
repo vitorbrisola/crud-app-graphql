@@ -44,7 +44,7 @@ export default class Test extends Component{
         }
     }
 
-    setEmptyQuestion = () => {
+    /*setEmptyQuestion = () => {
         // do noting when in edit mode
         if(this.state.questDisplayMode !== 'normal'){return false}
         this.setState({questDisplayMode:'add'})
@@ -63,13 +63,21 @@ export default class Test extends Component{
             await this.setState({questions:[newQuestion],curIndex:0})
         }
         this.setState({questDisplayMode:'normal'})
+    }*/
+
+    setEmptyQuestion = async () => {
+        const newQuestion = new Question({id:null,reRender:this.reRender})
+        const array = [...this.state.questions]
+        const index = array.length
+        await this.setState({questions:[...array,newQuestion],curIndex:index})
+        //this.setState({questDisplayMode:'normal'})
     }
 
     deleteQuestion = async () => {
         const index = this.state.curIndex;
         console.log(index)
-	//delete from server
-	this.state.questions[index].delete()
+	    //delete from server
+	    this.state.questions[index].delete()
         // deleting question locally
         var array = [...this.state.questions]
         array.splice(index,1)
@@ -152,14 +160,17 @@ export default class Test extends Component{
                 </div>
                 <Menu attached='bottom' tabular>
                     {this.state.questions.map((item,key)=>(
-                        <Menu.Item
-                            key={key}
-                            name={key.toString()}
-                            active={this.state.curIndex === key}
-                            onClick={this.changeQuestion}
-                        >
-                            Questão {(key+1).toString()}
-                        </Menu.Item>                        
+                        <Menu.Menu key={key}>
+                            <Menu.Item
+                                
+                                name={key.toString()}
+                                active={this.state.curIndex === key}
+                                onClick={this.changeQuestion}
+                            >
+                                Questão {(key+1).toString()}
+                            </Menu.Item>
+                            <Button icon='trash' color='red' onClick={this.deleteQuestion}/>
+                        </Menu.Menu>                        
                     ))}
 
                     <Menu.Menu position='right'>
