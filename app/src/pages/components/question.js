@@ -9,16 +9,18 @@ import updateQuestion from '../../relay/mutations/updateQuestion'
 import './quest.css'
 
 import Answer from './answer'
+import QuestionInput from './question/input'
 
 export default class Question {
 
-    constructor(id, description = null){
+    constructor({id, description = null,reRender=null}){
 
         this.id = id
-        if(description === null) {this.description = 'Loading...'}
-        else{this.description = description}
+        this.description = (description === null)?'':description;
         this.answers = [new Answer(this.deleteAnswer)];
 	    this.editing = false;
+        this.isOnServer = false;
+        this.fatherReRender = reRender;
 
         if(id !== null && description === null){            
             this.load()
@@ -30,11 +32,17 @@ export default class Question {
 
     }
 
+    reRender = () => {
+        if(this.fatherReRender !== null){this.fatherReRender()}
+    }
+
     load = async () => {
         // get question data from server, based on the data id
         await QuestionQuery(this.id)
             .then(data => {
                 this.description = data.question.description;
+                this.isOnServer = true;
+                this.reRender()
             })
             .catch(err => console.log(err.message))
     }
@@ -45,6 +53,7 @@ export default class Question {
         await addQuestion(this.description)
             .then(res => {
                 this.id = res.addQuestion.id;
+                this.isOnServer = true;
             })
     }
 
@@ -59,30 +68,81 @@ export default class Question {
         await updateQuestion(this.id,newDescription)
     }
 
+    edit = (values) => {
+        if(this.isOnServer){
+            this.update(values)
+        }else{
+            this.description = values
+            this.add()
+        }
+        this.editing = false;
+        this.reRender();
+    }
+
     getData(){return({
         id: this.id,
         description: this.description
     })}
 
-    render = (index) => {
-        return (
-            <div>
-                <Card
-                    fluid
-                    header={'Questão '+(index+1).toString()}
-                    description={this.description}
-                />
-            </div>
-            
-        )
-    }
 
     setNewEmptyAnswer = () => {
         this.answers.push(new Answer(this.deleteAnswer));
     }
 
+    addAnswer = () => {
+        this.setNewEmptyAnswer()
+    }
+
     deleteAnswer = () => {
 
     }
+
+
+
+    render = (index) => {
+        var display = () => (<div>Loading...</div>)
+        if (this.editing){
+            display = () => (
+                <QuestionInput 
+                    value={this.description} 
+                    onClick={this.edit}
+                />
+            )
+        }else{
+            display = () => (
+                <div>
+                    <div className='editButtons'>
+                        <Button icon='pencil' color='blue' onClick={()=>{
+                            this.editing=true
+                            this.reRender()
+                        }}/>
+                        <Button icon='trash' color='red' onClick={
+                            this.delete
+                        }/>
+                    </div>
+                    <Card
+                        fluid
+                        header={'Questão '+(index+1).toString()}
+                        description={this.description}
+                    />
+                    <div>
+                        {this.answers.map((item,key) => {
+                            return (
+                                <div key={key} className='answers'>
+                                    {item.render(key,this.addAnswer)}
+                                </div>)
+                        })}
+                    </div>
+                </div>
+            )
+        }
+        return (
+            <div>
+                {display()}
+            </div>
+            
+        )
+    }
+
 
 }

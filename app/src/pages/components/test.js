@@ -29,15 +29,17 @@ export default class Test extends Component{
         await QuestionsQuery()
             .then(data => {
                 for(var item of data.questions){
-                   this.setState({questions: [...this.state.questions,new Question(item.id)]})
+                    console.log(item.description)
+                    this.setState({
+                        questions: [...this.state.questions,new Question({id:item.id,reRender:this.reRender})]})
                 };
-	            if(data.questions){this.setState({questDisplayMode:'normal'})}
+	            if(data.questions){this.setState({questDisplayMode:'test'})}
             })
             .catch(err => console.log(err.message))
     }
 
     changeQuestion = (e,{name}) => {
-        if(this.state.questDisplayMode === 'normal') {
+        if(this.state.questDisplayMode === 'test')  {
             this.setState({curIndex: Number(name)})
         }
     }
@@ -137,7 +139,7 @@ export default class Test extends Component{
                 </div>
             )
         }else{
-            return(<div>Display mode não existe!</div>)
+            return(this.state.questions[this.state.curIndex].render(this.state.curIndex))
         }
     }
 
