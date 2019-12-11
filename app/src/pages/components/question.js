@@ -4,6 +4,7 @@ import {Card, Button} from 'semantic-ui-react'
 import QuestionQuery from '../../relay/queries/question';
 import addQuestion from '../../relay/mutations/addQuestion'
 import deleteQuestion from '../../relay/mutations/deleteQuestion'
+import updateQuestion from '../../relay/mutations/updateQuestion'
 
 import './quest.css'
 
@@ -52,9 +53,10 @@ export default class Question {
         await deleteQuestion(this.id)
     }
 
-    update = () => {
+    update = async (newDescription) => {
         // update question locally and from server
-        console.log('Update')
+        this.description = newDescription
+        await updateQuestion(this.id,newDescription)
     }
 
     getData(){return({

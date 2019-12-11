@@ -4,18 +4,17 @@ var GraphQLString = require('graphql').GraphQLString;
 
 var QuestModel = require('../mongodb/schema');
 var QuestType = require('./type').Type;
+var QuestInputType = require('./type').updateInput;
 
 exports.update = {
     type: QuestType,
     args: {
-        id: {            type: new GraphQLNonNull(GraphQLString)
-        },
-        description: {
-            type: new GraphQLNonNull(GraphQLString),
+        input: {            
+            type: new GraphQLNonNull(QuestInputType)
         }
     },
     resolve: async(root, args) =>{        
-        const UpdatedObj = await QuestModel.findByIdAndUpdate(args.id,args);
+        const UpdatedObj = await QuestModel.findByIdAndUpdate(args.input.id,args.input);
         if (!UpdatedObj) {
           throw new Error('Error')
         }

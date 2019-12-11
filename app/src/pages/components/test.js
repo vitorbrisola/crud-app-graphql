@@ -7,10 +7,6 @@ import Question from './question'
 
 import QuestionsQuery from '../../relay/queries/questions';
 
-let mockData = [
-    new Question(0,'x + 0 = 0'),
-    new Question(1,'x + 1 = 0'),
-]
 
 export default class Test extends Component{
 
@@ -92,24 +88,24 @@ export default class Test extends Component{
 
     updateQuestion = async (newDescription) => {
 	    const index = this.state.curIndex;
-        this.state.questions[index].description = newDescription;
+        this.state.questions[index].update(newDescription);
         this.setState({questDisplayMode:'normal'})
     }
 
     questionRender = (question) => {
-        if(this.state.questDisplayMode == 'add'){
+        if(this.state.questDisplayMode === 'add'){
             // question adding  layout
             return(
                 <QuestionInput onClick={this.addQuestion}/>
             )
-        }else if(this.state.questDisplayMode == 'edit'){
+        }else if(this.state.questDisplayMode === 'edit'){
             // question adding  layout
             return(
                 <QuestionInput 
                     value={this.state.questions[this.state.curIndex].description} 
                     onClick={this.updateQuestion}/>
             )
-        }else if(this.state.questDisplayMode == 'normal'){
+        }else if(this.state.questDisplayMode === 'normal'){
             // question visualization layout
             return(
                 <div>

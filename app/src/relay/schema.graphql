@@ -8,9 +8,13 @@ type Query {
 type Mutation {
     addQuestion(description: String!): Question
     deleteQuestion(id: String!): Question
-    updateQuestion(id: String!): Question
+    updateQuestion(input: updateQuestionInput!): Question
 }
 
+input updateQuestionInput {
+    id: String!
+    description: String!
+}
 
 type Question {
     id: ID!
