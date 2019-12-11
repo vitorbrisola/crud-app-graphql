@@ -18,11 +18,11 @@ export default class Question {
         else{this.description = description}
         this.answers = [];
 
-        /*if(id !== null){            
+        if(id !== null && description === null){            
             this.load()
-        }else{
+        }else if(id === null && description !== null){
             this.add()
-        }*/
+        }
 
     }
 
