@@ -12,7 +12,7 @@ export default class QuestionInput extends Component{
     };
 
     handleClick = async () => {
-        this.props.click(this.state.question);
+        this.props.onClick(this.state.question);
     }
 
     handleChange = (e) => {

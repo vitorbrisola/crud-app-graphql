@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.testPage {
+    height: 500px;
+    padding: 50px;
+    
+}
+
+.editButtons {
+    display: flex;
+    justify-content: flex-end;
+}

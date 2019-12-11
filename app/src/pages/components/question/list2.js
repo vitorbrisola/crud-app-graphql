@@ -1,13 +1,12 @@
 import React,{Component} from 'react';
-import {Button} from 'semantic-ui-react'
+import {Card,Button} from 'semantic-ui-react'
 
 import './quest.css'
 
-import QuestionCard from './card';
 import QuestionInput from './input'
 
 import QuestionsQuery from '../../../relay/queries/questions';
-
+import Question from './question'
 
 export default class QuestionList extends Component{
 
@@ -19,29 +18,23 @@ export default class QuestionList extends Component{
     }
 
     componentDidMount(){
-        this.loadFromServer()
+        this.loadIds()
     }
 
-    loadFromServer = async () =>{
+    loadIds = async () =>{
         await QuestionsQuery()
             .then(data => {
-                this.setState({questions: data.questions});
+                for (var question of data.questions){
+                    this.addQuestion(question.id,null)
+                }
+
             })
             .catch(err => console.log(err.message))
     }
 
-    addQuestion = async (newDescription) => {
-        console.log(newDescription)
-        const newQuestion = {id:null,description:newDescription}
+    addQuestion = (id,description) => {
+        const newQuestion = new Question(id,description);
         this.setState({questions: [...this.state.questions,newQuestion]})
-    }
-
-    deleteQuestion = async (index) => {      
-        // deleting locally
-        //console.log(index)
-        //const array = [...this.state.questions]
-        //array.splice(index, 1);
-        //await this.setState({questions: array});
     }
 
 
@@ -53,11 +46,11 @@ export default class QuestionList extends Component{
                 <div>
                     {this.state.questions.map((item,key) => (
                         <div key={key} className='qCard'>
-                            <QuestionCard
-                                index={key}
-                                data={item}
-                                onDelete={this.deleteQuestion} />
-                            <Button icon='trash' color='red' onClick={this.deleteQuestion} />
+                            <Card
+                                fluid
+                                header={'Questão '+(key+1).toString()}
+                                description={item.getData().description}
+                            />
                         </div>
                     ))}
                 </div>
@@ -68,7 +61,17 @@ export default class QuestionList extends Component{
     render(){
         return(
             <div>
-                {this.listRender()}
+                <div>
+                    {this.state.questions.map((item,key) => (
+                        <div key={key} className='qCard'>
+                            <Card
+                                fluid
+                                header={'Questão '+(key+1).toString()}
+                                description={item.getData().description}
+                            />
+                        </div>
+                    ))}
+                </div>
                 <div className='qInput'>
                     <QuestionInput click={this.addQuestion}/>    
                 </div>

@@ -7,6 +7,8 @@ import deleteQuestion from '../../../relay/mutations/deleteQuestion'
 
 import './quest.css'
 
+
+
 export default class QuestionCard extends Component{
 
     constructor(props){
@@ -55,21 +57,22 @@ export default class QuestionCard extends Component{
     delete = async () => {
         // delete question from server based on its id
         await deleteQuestion(this.state.id)
-            .then(this.props.onDelete(this.state.index))
+        return true
     }
 
-    update = (newDescription) => {
+    update = () => {
         // update question locally and from server
+        console.log('Update')
+        return true
     }
 
     render(){
         return (
-            <div className='qCard'>
+            <div>
                 <Card
                     fluid
                     header={'Questão '+(this.state.index+1).toString()}
                     description={this.state.description}
-                    extra={<Button icon='trash' color='red' onClick={this.delete} />}
                 />
             </div>
             

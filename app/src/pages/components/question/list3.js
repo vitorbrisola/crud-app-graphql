@@ -25,9 +25,20 @@ export default class QuestionList extends Component{
     loadFromServer = async () =>{
         await QuestionsQuery()
             .then(data => {
-                this.setState({questions: data.questions});
+                //this.setState({questions: data.questions});
+                for(var question of data.questions){
+                    this.newQuestion(question)
+                }
             })
             .catch(err => console.log(err.message))
+    }
+
+    newQuestion = async (data) => {
+        const newQuestion = (<QuestionCard
+                                index={0}
+                                data={data}
+                                onDelete={this.deleteQuestion} />);
+        await this.setState({questions: [...this.state.questions,newQuestion]})
     }
 
     addQuestion = async (newDescription) => {
@@ -36,12 +47,18 @@ export default class QuestionList extends Component{
         this.setState({questions: [...this.state.questions,newQuestion]})
     }
 
-    deleteQuestion = async (index) => {      
+    deleteQuestion = async (e) => {      
         // deleting locally
-        //console.log(index)
-        //const array = [...this.state.questions]
-        //array.splice(index, 1);
-        //await this.setState({questions: array});
+        if (!e.target.id) {console.log('not working')}
+        else {
+            const index = e.target.id
+            console.log(index)
+            //await this.state.questions[index].delete()
+            const array = [...this.state.questions]
+            array.splice(index, 1);
+            this.setState({questions: array});
+        }
+        
     }
 
 
@@ -53,11 +70,8 @@ export default class QuestionList extends Component{
                 <div>
                     {this.state.questions.map((item,key) => (
                         <div key={key} className='qCard'>
-                            <QuestionCard
-                                index={key}
-                                data={item}
-                                onDelete={this.deleteQuestion} />
-                            <Button icon='trash' color='red' onClick={this.deleteQuestion} />
+                            {item}
+                            <Button icon='trash' color='red' id={key} onClick={this.deleteQuestion}/>
                         </div>
                     ))}
                 </div>

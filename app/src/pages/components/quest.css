@@ -5,11 +5,13 @@ body {
 }
 
 .qCard {
+
     margin: 20px;
     background-color: rgb(134, 19, 19);
     padding: 20px;
-    place-content: center;;
+    align-content: center;
     color: white;
+    
 }
 
 .qInput {
