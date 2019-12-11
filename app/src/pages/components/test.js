@@ -93,10 +93,11 @@ export default class Test extends Component{
         this.setState({questDisplayMode:'normal'})
     }
 
+
     newAnswer = () => {
         const index = this.state.curIndex;
         this.state.questions[index].setNewEmptyAnswer();
-        this.setState({renderCounter: (this.state.renderCounter+1)})
+        this.reRender()
     }
 
     questionRender = (question) => {
@@ -174,4 +175,10 @@ export default class Test extends Component{
         )
     }
 
+    reRender = () => {
+        this.setState({renderCounter: (this.state.renderCounter+1)})
+    }
+
 }
+
+

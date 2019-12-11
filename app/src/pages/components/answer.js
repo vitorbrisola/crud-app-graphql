@@ -12,12 +12,14 @@ import './answer.css'
 
 export default class Answer {
 
-    constructor(id = null, text = null, isRight = false){
+    constructor(onDelete,id = null, text = null, isRight = false){
 
         this.id = id
-        this.text = (text === null)? "Loading...":text;
+        this.text = (text === null)? '':text;
         this.isRight = isRight;
 		this.editing = false
+
+		this.onDelete = onDelete;
 
 	if(id === null && text === null){
 		this.editing = true;
@@ -38,7 +40,8 @@ export default class Answer {
     }
 
     delete = async () => {
-        // delete answer from server 
+		// delete answer from server 
+		this.onDelete()
     }
 
     update = async (newText) => {
@@ -55,6 +58,7 @@ export default class Answer {
 		display = () => (
 			<QuestionInput
 				placeholder='Adicionar Resposta'
+				value={this.text}
 				onClick={(res) => {
 					this.update(res)
 					callback()
@@ -63,10 +67,14 @@ export default class Answer {
 		)
 	}else{
 		display = () => (
+			<div className='card'>
 				<Card
 					fluid
 						description={this.text}
 				/>
+				<Button icon='pencil' color='blue' onClick={()=> {this.editing=true}}/>
+				<Button icon='trash' color='red' onClick={this.delete}/>
+			</div>
 		)
 	}
 

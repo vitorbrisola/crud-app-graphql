@@ -6,7 +6,7 @@ body {
 
 .answer {
     margin: 10px;
-    width: 95%;
+    width: 98%;
     display: flex;
     flex-direction: row;
 }
@@ -18,5 +18,8 @@ body {
 
 .input {
     width: 100%;
-    
+}
+
+.card {
+    padding: 0px;
 }

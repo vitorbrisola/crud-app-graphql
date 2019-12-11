@@ -17,21 +17,17 @@ export default class Question {
         this.id = id
         if(description === null) {this.description = 'Loading...'}
         else{this.description = description}
-        this.answers = [new Answer()];
-	    this.isEditing = false;
+        this.answers = [new Answer(this.deleteAnswer)];
+	    this.editing = false;
 
         if(id !== null && description === null){            
             this.load()
         }else if(id === null && description !== null){
             this.add()
         }else if(id === null && description === null){
-	        this.isEditing = true;
+	        this.editing = true;
 	    }
 
-    }
-
-    setNewEmptyAnswer = () => {
-        this.answers.push(new Answer());
     }
 
     load = async () => {
@@ -79,6 +75,14 @@ export default class Question {
             </div>
             
         )
+    }
+
+    setNewEmptyAnswer = () => {
+        this.answers.push(new Answer(this.deleteAnswer));
+    }
+
+    deleteAnswer = () => {
+
     }
 
 }
