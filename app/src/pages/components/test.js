@@ -16,7 +16,8 @@ export default class Test extends Component{
             questions: [],
             curIndex: 0,
             questDisplayMode: 'add',
-            deleteCounter: 0
+            deleteCounter: 0,
+            renderCounter: 0
         }
     }
 
@@ -92,6 +93,12 @@ export default class Test extends Component{
         this.setState({questDisplayMode:'normal'})
     }
 
+    newAnswer = () => {
+        const index = this.state.curIndex;
+        this.state.questions[index].setNewEmptyAnswer();
+        this.setState({renderCounter: (this.state.renderCounter+1)})
+    }
+
     questionRender = (question) => {
         if(this.state.questDisplayMode === 'add'){
             // question adding  layout
@@ -120,7 +127,10 @@ export default class Test extends Component{
                     />
                     <div>
                         {this.state.questions[this.state.curIndex].answers.map((item,key) => {
-                            return (<div key={key} className='answers'>{item.render('a')}</div>)
+                            return (
+                                <div key={key} className='answers'>
+                                    {item.render(key,this.newAnswer)}
+                                </div>)
                         })}
                     </div>
                 </div>

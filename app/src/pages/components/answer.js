@@ -43,38 +43,50 @@ export default class Answer {
 
     update = async (newText) => {
         // update question locally and from server
-        this.text = newText
+		this.text = newText
 		//this.isRight = newRightness
+		this.editing=false
+		
     }
 
-    render = (index) => {
+    render = (index,callback) => {
+	var display = ''
 	if(this.editing){
-		return (
-			<div className='answer'>
-				<div className='checkbox'>
-					<Checkbox radio/>
-				</div>
-				<div className='input'>
-					<QuestionInput
-						placeholder='Adicionar Resposta'
-						onClick={this.update}
-					/>
-				</div>
-				
-			</div>
+		display = () => (
+			<QuestionInput
+				placeholder='Adicionar Resposta'
+				onClick={(res) => {
+					this.update(res)
+					callback()
+				}}
+			/>
 		)
 	}else{
-        	return (
-            	<div >
-                	<Card
-                	    fluid
-               	     	    header={'Alternativa '+ index.toString()}
-                    	    description={this.text}
-                	/>
-            	</div>
-            
-        	)
+		display = () => (
+				<Card
+					fluid
+						description={this.text}
+				/>
+		)
 	}
+
+	return (
+		<div className='answer'>
+			<div className='checkbox'>
+				<Checkbox radio/>
+			</div>
+			<div className='input'>
+				{display()}
+			</div>
+			
+		</div>
+	)
+
+        	
+
+            
+        	
+	
     }
 
 }

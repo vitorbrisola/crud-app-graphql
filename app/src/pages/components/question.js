@@ -30,6 +30,10 @@ export default class Question {
 
     }
 
+    setNewEmptyAnswer = () => {
+        this.answers.push(new Answer());
+    }
+
     load = async () => {
         // get question data from server, based on the data id
         await QuestionQuery(this.id)
