@@ -17,12 +17,15 @@ export default class Question {
         if(description === null) {this.description = 'Loading...'}
         else{this.description = description}
         this.answers = [];
+	    this.isEditing = false;
 
         if(id !== null && description === null){            
             this.load()
         }else if(id === null && description !== null){
             this.add()
-        }
+        }else if(id === null && description === null){
+	    this.isEditing = true;
+	}
 
     }
 
@@ -65,7 +68,7 @@ export default class Question {
                 <Card
                     fluid
                     header={'Questão '+(index+1).toString()}
-                    description={this.getDescription()}
+                    description={this.description}
                 />
             </div>
             

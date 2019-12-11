@@ -6,10 +6,14 @@ export default class QuestionInput extends Component{
     constructor(props) {
         super(props);
 
+        if(this.props.value){var question=this.props.value}
+        else{var question = ''}
+
         this.state = {
-            question: ''
+            question: question
         }
     };
+
 
     handleClick = async () => {
         this.props.onClick(this.state.question);
@@ -24,6 +28,7 @@ export default class QuestionInput extends Component{
         return (
                 <Input 
                     fluid 
+                    value={this.state.question}
                     action={{
                         color: 'teal',
                         icon: 'check',

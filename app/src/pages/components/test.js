@@ -19,7 +19,7 @@ export default class Test extends Component{
         this.state = {
             questions: [],
             curIndex: 0,
-            isEditing: true,
+            questDisplayMode: 'add',
             deleteCounter: 0
         }
     }
@@ -31,24 +31,24 @@ export default class Test extends Component{
     loadQuestions = async () =>{
         await QuestionsQuery()
             .then(data => {
-               for(var item of data.questions){
+                for(var item of data.questions){
                    this.setState({questions: [...this.state.questions,new Question(item.id)]})
-               };
-	       if(data.questions){this.setState({isEditing:false})}
+                };
+	            if(data.questions){this.setState({questDisplayMode:'normal'})}
             })
             .catch(err => console.log(err.message))
     }
 
     changeQuestion = (e,{name}) => {
-        if(!this.state.isEditing) {
+        if(this.state.questDisplayMode === 'normal') {
             this.setState({curIndex: Number(name)})
         }
     }
 
     setEmptyQuestion = () => {
         // do noting when in edit mode
-        if(this.state.isEditing){return false}
-        this.setState({isEditing:true})
+        if(this.state.questDisplayMode !== 'normal'){return false}
+        this.setState({questDisplayMode:'add'})
         var newQuestion = null
         const index = this.state.questions.length
         this.setState({questions:[...this.state.questions,newQuestion],curIndex:index})
@@ -63,7 +63,7 @@ export default class Test extends Component{
         }else{
             await this.setState({questions:[newQuestion],curIndex:0})
         }
-        this.setState({isEditing:false})
+        this.setState({questDisplayMode:'normal'})
     }
 
     deleteQuestion = async () => {
@@ -86,23 +86,35 @@ export default class Test extends Component{
         await this.setState({questions:[...array], deleteCounter:(this.state.deleteCounter+1)})
     }
 
-    updateQuestion = async () => {
-	const index = this.state.curIndex;
-	console.log(index)
+    editQuestion = () => {
+        this.setState({questDisplayMode:'edit'})
+    }
+
+    updateQuestion = async (newDescription) => {
+	    const index = this.state.curIndex;
+        this.state.questions[index].description = newDescription;
+        this.setState({questDisplayMode:'normal'})
     }
 
     questionRender = (question) => {
-        if(this.state.isEditing){
+        if(this.state.questDisplayMode == 'add'){
             // question adding  layout
             return(
                 <QuestionInput onClick={this.addQuestion}/>
             )
-        }else{
+        }else if(this.state.questDisplayMode == 'edit'){
+            // question adding  layout
+            return(
+                <QuestionInput 
+                    value={this.state.questions[this.state.curIndex].description} 
+                    onClick={this.updateQuestion}/>
+            )
+        }else if(this.state.questDisplayMode == 'normal'){
             // question visualization layout
             return(
                 <div>
                     <div className='editButtons'>
-			<Button icon='pencil' color='blue' onClick={this.updateQuestion}/>
+			            <Button icon='pencil' color='blue' onClick={this.editQuestion}/>
                         <Button icon='trash' color='red' onClick={this.deleteQuestion}/>
                     </div>
                     <Card
@@ -112,6 +124,8 @@ export default class Test extends Component{
                     />
                 </div>
             )
+        }else{
+            return(<div>Display mode não existe!</div>)
         }
     }
 
