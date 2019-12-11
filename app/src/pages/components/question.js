@@ -8,7 +8,7 @@ import updateQuestion from '../../relay/mutations/updateQuestion'
 
 import './quest.css'
 
-
+import Answer from './answer'
 
 export default class Question {
 
@@ -17,7 +17,7 @@ export default class Question {
         this.id = id
         if(description === null) {this.description = 'Loading...'}
         else{this.description = description}
-        this.answers = [];
+        this.answers = [new Answer()];
 	    this.isEditing = false;
 
         if(id !== null && description === null){            
@@ -25,8 +25,8 @@ export default class Question {
         }else if(id === null && description !== null){
             this.add()
         }else if(id === null && description === null){
-	    this.isEditing = true;
-	}
+	        this.isEditing = true;
+	    }
 
     }
 

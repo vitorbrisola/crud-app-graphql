@@ -118,6 +118,11 @@ export default class Test extends Component{
                         header={'Questão '+(this.state.curIndex+1).toString()}
                         description={question.description}
                     />
+                    <div>
+                        {this.state.questions[this.state.curIndex].answers.map((item,key) => {
+                            return (<div key={key} className='answers'>{item.render('a')}</div>)
+                        })}
+                    </div>
                 </div>
             )
         }else{

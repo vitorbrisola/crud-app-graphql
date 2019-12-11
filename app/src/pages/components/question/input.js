@@ -6,11 +6,13 @@ export default class QuestionInput extends Component{
     constructor(props) {
         super(props);
 
-        if(this.props.value){var question=this.props.value}
-        else{var question = ''}
+
+        const question = this.props.value?this.props.value:''
+        const placeholder = this.props.placeholder? this.props.placeholder:'Adicionar Questão...'
 
         this.state = {
-            question: question
+            question: question,
+            placeholder: placeholder
         }
     };
 
@@ -35,7 +37,7 @@ export default class QuestionInput extends Component{
                         onClick: () => this.handleClick(),
                     }}
                     onChange={this.handleChange}
-                    placeholder='Adicionar Questão...' 
+                    placeholder={this.state.placeholder} 
                 />
         )
     }

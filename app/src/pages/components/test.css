@@ -14,3 +14,8 @@ body {
     display: flex;
     justify-content: flex-end;
 }
+
+.answers {
+    display: flex;
+    justify-content: flex-end;
+}
