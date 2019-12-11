@@ -3,19 +3,16 @@ import {Card,Icon, Menu,Button} from 'semantic-ui-react';
 import './test.css'
 
 import QuestionInput from './question/input'
+import Question from './question'
+import { async } from 'q';
 
 let mockData = [
-    {
-        id: 0,
-        description:"x + 1 = 0"
-    },{
-        id: 1,
-        description:"x + 1 = 1"
-    },{
-        id: 2,
-        description:"x + 1 = 2"
-    }
+    new Question(0,'x + 0 = 0'),
+    new Question(1,'x + 1 = 0'),
+    new Question(2,'x + 2 = 0'),
+    new Question(3,'x + 3 = 0'),
 ]
+
 
 
 export default class Test extends Component{
@@ -30,9 +27,6 @@ export default class Test extends Component{
         }
     }
 
-    componentDidMount(){
-        
-    }
 
     handleItemClick = (e,{name}) => {
         if(!this.state.isEditing) {
@@ -42,34 +36,41 @@ export default class Test extends Component{
 
     addQuestion = () => {
         if(this.state.isEditing){return false}
-        var newQuestion = {
-            id: 3,
-            description: 'x + 1 = 4'
-        }
-
+        this.setState({isEditing:true})
+        var newQuestion = null
         const index = this.state.questions.length
-        this.setState({questions:[...this.state.questions,newQuestion],curIndex:index,isEditing:true})
+        this.setState({questions:[...this.state.questions,newQuestion],curIndex:index})
     }
 
-    setQuestion = (description) => {
-        const newQuestion = {
-            id: 3,
-            description: description
-        }
+    setQuestion = async (description) => {
+        const newQuestion = new Question(3,description)
         const array = [...this.state.questions]
-        array.pop()
-        this.setState({questions:[...array,newQuestion],isEditing:false})
+        if(array.length > 0){
+            array.pop()
+            await this.setState({questions:[...array,newQuestion]})
+        }else{
+            await this.setState({questions:[newQuestion],curIndex:0})
+        }
+        this.setState({isEditing:false})
     }
 
-    deleteQuestion = () => {
+    deleteQuestion = async () => {
         const index = this.state.curIndex;
         console.log(index)
-        if(index === this.state.questions.length - 1){
-            this.setState({curIndex: (index-1)})
-        }
+
+
         var array = [...this.state.questions]
         array.splice(index,1)
-        this.setState({questions:[...array], deleteCounter:(this.state.deleteCounter+1)})
+
+        if(array.length === 0){
+            this.addQuestion()
+        }else if(index === array.length){
+            await this.setState({curIndex: (index-1)})
+        }
+        await this.setState({questions:[...array], deleteCounter:(this.state.deleteCounter+1)})
+
+        
+
     }
 
 

@@ -1,9 +1,9 @@
 import React from 'react'
 import {Card, Button} from 'semantic-ui-react'
 
-import QuestionQuery from '../relay/queries/question';
-import addQuestion from '../relay/mutations/addQuestion'
-import deleteQuestion from '../relay/mutations/deleteQuestion'
+import QuestionQuery from '../../relay/queries/question';
+import addQuestion from '../../relay/mutations/addQuestion'
+import deleteQuestion from '../../relay/mutations/deleteQuestion'
 
 import './quest.css'
 
