@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 75e3526dd143316aff4f23e7cfe3d5df
+ * @relayHash c216317c505cfdeec37c8731a4cfb0fd
  */
 
 /* eslint-disable */
@@ -12,8 +12,7 @@ import type { ConcreteRequest } from 'relay-runtime';
 export type questionsQueryVariables = {||};
 export type questionsQueryResponse = {|
   +questions: ?$ReadOnlyArray<?{|
-    +id: string,
-    +description: ?string,
+    +id: string
   |}>
 |};
 export type questionsQuery = {|
@@ -27,7 +26,6 @@ export type questionsQuery = {|
 query questionsQuery {
   questions {
     id
-    description
   }
 }
 */
@@ -47,13 +45,6 @@ var v0 = [
         "kind": "ScalarField",
         "alias": null,
         "name": "id",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "description",
         "args": null,
         "storageKey": null
       }
@@ -80,11 +71,11 @@ return {
     "operationKind": "query",
     "name": "questionsQuery",
     "id": null,
-    "text": "query questionsQuery {\n  questions {\n    id\n    description\n  }\n}\n",
+    "text": "query questionsQuery {\n  questions {\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '285655461a4a3efbccd2f6e85b8b21e3';
+(node/*: any*/).hash = '6957074f55d6b3af2b09c3df3d405ff4';
 module.exports = node;

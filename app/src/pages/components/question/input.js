@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import { Input } from 'semantic-ui-react';
-import addQuestion from '../../relay/mutations/addQuestion'
 
 export default class QuestionInput extends Component{
 
@@ -13,10 +12,7 @@ export default class QuestionInput extends Component{
     };
 
     handleClick = async () => {
-        //this.props.click();
-        //console.log(this.state.question)
-        await addQuestion(this.state.question)
-            .then( res => console.log('Hoi: ' + res))
+        this.props.click(this.state.question);
     }
 
     handleChange = (e) => {

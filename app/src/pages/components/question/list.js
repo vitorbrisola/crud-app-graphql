@@ -1,5 +1,11 @@
 import React,{Component} from 'react';
+
+import './quest.css'
+
 import QuestionCard from './card';
+import QuestionInput from './input'
+
+import QuestionsQuery from '../../../relay/queries/questions';
 
 
 export default class QuestionList extends Component{
@@ -13,22 +19,59 @@ export default class QuestionList extends Component{
 
     componentDidMount(){
         this.setState({
-            questions: this.props.data
+            questions: []
         })
+        this.loadFromServer()
     }
 
-    deleteQuestion = (id) => {
-        this.props.onDelete(id)
+    loadFromServer = async () =>{
+        await QuestionsQuery()
+            .then(data => {
+                this.setState({questions: data.questions});
+            })
+            .catch(err => console.log(err.message))
+    }
+
+    addQuestion = async (newDescription) => {
+        console.log(newDescription)
+        const newQuestion = {id:null,description:newDescription}
+        this.setState({questions: [...this.state.questions,newQuestion]})
+    }
+
+    deleteQuestion = async (index) => {      
+        // deleting locally
+        console.log(index)
+        const array = [...this.state.questions]
+        array.splice(index, 1);
+        this.setState({questions: array});
+    }
+
+
+    listRender = () => {
+        if(this.state.questions.length === 0){
+            return(<div>Nenhuma questão encontrada!</div>)
+        }else{
+            return(
+                <div>
+                    {this.state.questions.map((item,key) => (
+                        <QuestionCard
+                            key={key} 
+                            index={key}
+                            data={item}
+                            onDelete={this.deleteQuestion} />
+                    ))}
+                </div>
+            )
+        }
     }
 
     render(){
         return(
             <div>
-                {this.state.questions().map((item,key) => (
-                    <QuestionCard 
-                        data={{id:key,description:item.description,answers:item.answers}}
-                        onDelete={this.deleteQuestion} />
-                ))}
+                {this.listRender()}
+                <div className='qInput'>
+                    <QuestionInput click={this.addQuestion}/>    
+                </div>
             </div>
         )
     }

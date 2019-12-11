@@ -22,7 +22,7 @@ const addQuestion = async (description) => {
         {
           mutation,
           variables,
-          onCompleted: (res) => {console.log(res)},
+          onCompleted: (res) => {resolve(res)},
           onError: (err) => {console.log(err)},
         })
     })  
