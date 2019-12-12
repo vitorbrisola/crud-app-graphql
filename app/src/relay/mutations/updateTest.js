@@ -19,7 +19,6 @@ const updateTest = async (id,questions) => {
       }
     }
 
-    console.log(variables)
 
     return await new Promise((resolve, reject) => {
       commitMutation(
@@ -27,8 +26,8 @@ const updateTest = async (id,questions) => {
         {
           mutation,
           variables,
-          onCompleted: (res) => {console.log(res)},
-          onError: (err) => {console.log(err)},
+          onCompleted: (res) => {resolve(res)},
+          onError: (err) => {reject(err)},
         })
     })  
 } 

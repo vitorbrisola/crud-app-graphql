@@ -44,10 +44,8 @@ export default class Question {
         await QuestionQuery(this.id)
             .then(data => {
                 //data saving
-                console.log(data.question.answers)
                 this.description = data.question.description;
                 for(var answer of data.question.answers){
-                    console.log(answer)
                     this.answers.push(new Answer(
                         {id:answer,
                         reRender:this.reRender,
@@ -80,7 +78,7 @@ export default class Question {
         if(this.isOnServer){
             // erase all answers
             while(this.answers.length > 0){
-                const answer = this.answers.pop()
+                var answer = this.answers.pop()
                 answer.delete()
             }
             // erase question
@@ -95,7 +93,11 @@ export default class Question {
         for(var answer of this.answers){
             if(answer.id !== null)answersIds.push(answer.id.toString())
         }
-        await updateQuestion(this.id.toString(),this.description,answersIds)
+        return await new Promise( (resolve,reject) =>
+            updateQuestion(this.id.toString(),this.description,answersIds)
+                .then(res => resolve(res.updateQuestion.id))
+                .catch(err => reject(err))
+        )
     }
 
     edit = (values) => {
@@ -118,7 +120,9 @@ export default class Question {
     addAnswer = async () => {
         // is now that new answers will always be the last one
         await this.update()
-        this.reRender() 
+            .then(res =>{
+                this.setNewEmptyAnswer()
+            })
     }
 
     render = (index) => {

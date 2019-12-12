@@ -20,16 +20,14 @@ const updateQuestion = async (id,description,answers) => {
       }
     }
 
-    console.log(variables)
-
     return await new Promise((resolve, reject) => {
       commitMutation(
         environment,
         {
           mutation,
           variables,
-          onCompleted: (res) => {console.log(res)},
-          onError: (err) => {console.log(err)},
+          onCompleted: (res) => {resolve(res)},
+          onError: (err) => {reject(err)},
         })
     })  
 } 

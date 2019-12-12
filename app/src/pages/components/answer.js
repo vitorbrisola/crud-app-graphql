@@ -24,7 +24,6 @@ export default class Answer {
 		this.parentReRender = reRender;
 		this.parentOnAdd = onAdd;
 
-		console.log(`id: ${id}, text: ${text}`)
 		// constructor options
 		if(id === null && text === ''){
 			this.editing = true;
@@ -41,7 +40,6 @@ export default class Answer {
 	}
 
     load = async () => {
-		console.log('load: '+this.id)
 		// get answer data from server
 		await AnswerQuery(this.id)
 			.then(data => {
@@ -65,9 +63,9 @@ export default class Answer {
 			})
     }
 
-    delete = async () => {
+    delete = () => {
 		// delete answer from server
-		 
+		if(this.id !== null) {deleteAnswer(this.id)}
     }
 
     update = async (newText) => {
