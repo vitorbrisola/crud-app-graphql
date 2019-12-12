@@ -5,21 +5,16 @@ import environment from '../Environment';
 
 
 const query = graphql`
-  query questionQuery($input: ID!){
-    question(id: $input) {
-        description 
-        answers
+  query answersQuery{
+    answers {
+        id   
     }  
   }
 `;
 
-const QuestionQuery = (id) => {
+const variables = {}
 
-  const variables = {
-    input: id
-  }
-
-
+const AnswersQuery = () => {
   return new Promise((resolve, reject) => {
       fetchQuery(environment, query, variables)
           .then(data => {
@@ -29,4 +24,4 @@ const QuestionQuery = (id) => {
   })
 }
 
-export default QuestionQuery;
+export default AnswersQuery;

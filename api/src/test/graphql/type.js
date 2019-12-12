@@ -6,9 +6,17 @@ var GraphQLString = require('graphql').GraphQLString;
 var GraphQLList = require('graphql').GraphQLList;
 
 
+exports.addInput = new GraphQLInputObjectType({
+    name:'addTestInput',
+    fields: () => ({
+        questions: {
+            type: new GraphQLList(GraphQLString),
+        }
+    })
+})
 
-exports.Input = new GraphQLInputObjectType({
-            name:'testInput',
+exports.upInput = new GraphQLInputObjectType({
+            name:'upTestInput',
             fields: () => ({
                 id: {            
                     type: new GraphQLNonNull(GraphQLString)

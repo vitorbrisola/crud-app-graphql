@@ -1,19 +1,44 @@
 
 type Query {
-    questions: [Question]
+    answers: [Answer]
+    answer(id: ID!): Answer
 
+    questions: [Question]
     question(id: ID!): Question
+
+    tests: [Test]
+    test(id: ID!): Test
 }
 
 type Mutation {
-    addQuestion(description: String!): Question
-    deleteQuestion(id: String!): Question
-    updateQuestion(input: updateQuestionInput!): Question
+    addAnswer(input: answerInput!): Answer
+    deleteAnswer(id: String!): Answer
+    updateAnswer(input: answerInput!): Answer
 
+    addQuestion(input: questionInput!): Question
+    deleteQuestion(id: String!): Question
+    updateQuestion(input: questionInput!): Question
+
+    addTest(input: testInput!): Test
+    deleteTest(id: String!): Test
+    updateTest(input: testInput!): Test
     
 }
 
-input updateQuestionInput {
+input answerInput {
+    id: String!
+    text: String!
+    isCorrect: Boolean!
+}
+
+type Answer {
+    id: ID!
+    description: String
+    isCorrect: Boolean!
+}
+
+
+input questionInput {
     id: String!
     description: String!
     answers: [String]!
@@ -22,4 +47,16 @@ input updateQuestionInput {
 type Question {
     id: ID!
     description: String
+    answers: [String]
 }
+
+input testInput {
+    id: String!
+    questions: [String]!
+}
+
+type Test {
+    id: ID!
+    questions: [String]
+}
+

@@ -6,8 +6,20 @@ var GraphQLString = require('graphql').GraphQLString;
 var GraphQLBoolean = require('graphql').GraphQLBoolean;
 
 
-exports.Input = new GraphQLInputObjectType({
-    name:'answerInput',
+exports.addInput = new GraphQLInputObjectType({
+    name:'addAnswerInput',
+    fields: () => ({
+        text: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
+        isRight: {        
+            type: new GraphQLNonNull(GraphQLBoolean),    
+        }  
+    })
+})
+
+exports.upInput = new GraphQLInputObjectType({
+    name:'upAnswerInput',
     fields: () => ({
         id: {            
             type: new GraphQLNonNull(GraphQLString)

@@ -5,10 +5,21 @@ var GraphQLID = require('graphql').GraphQLID;
 var GraphQLString = require('graphql').GraphQLString;
 var GraphQLList = require('graphql').GraphQLList;
 
+exports.addInput = new GraphQLInputObjectType({
+    name:'addQuestionInput',
+    fields: () => ({
+        description: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
+        answers: {
+            type: new GraphQLList(GraphQLString),
+        }
+    })
+})
 
 
-exports.Input = new GraphQLInputObjectType({
-            name:'questionInput',
+exports.upInput = new GraphQLInputObjectType({
+            name:'upQuestionInput',
             fields: () => ({
                 id: {            
                     type: new GraphQLNonNull(GraphQLString)

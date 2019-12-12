@@ -2,7 +2,7 @@ var GraphQLNonNull = require('graphql').GraphQLNonNull;
 
 var Model = require('../mongodb/schema');
 var Type = require('./type').Type;
-var InputType = require('./type').Input;
+var InputType = require('./type').addInput;
 
 exports.add = {
   type: Type,

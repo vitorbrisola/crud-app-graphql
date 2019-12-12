@@ -5,15 +5,14 @@ import environment from '../Environment';
 
 
 const query = graphql`
-  query questionQuery($input: ID!){
-    question(id: $input) {
-        description 
-        answers
+  query testQuery($input: ID!){
+    test(id: $input) {
+      questions
     }  
   }
 `;
 
-const QuestionQuery = (id) => {
+const TestQuery = (id) => {
 
   const variables = {
     input: id
@@ -29,4 +28,4 @@ const QuestionQuery = (id) => {
   })
 }
 
-export default QuestionQuery;
+export default TestQuery;

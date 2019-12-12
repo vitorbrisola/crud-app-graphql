@@ -3,20 +3,17 @@ import {commitMutation} from 'relay-runtime';
 import environment from "../Environment";
 
 const mutation = graphql`
-  mutation addQuestionMutation($input: questionInput! ) {
-    addQuestion(description: $input) {
+  mutation addAnswerMutation($input: String! ) {
+    addAnswer(description: $input) {
       id
     }  
   }
 `;
 
 
-const addQuestion = async (description,answers) => {
+const addAnswer = async (description) => {
     const variables = {
-      input:{
-        description,
-        answers
-      }
+      input:description
     }
 
     return await new Promise((resolve, reject) => {
@@ -32,4 +29,4 @@ const addQuestion = async (description,answers) => {
 } 
 
 
-export default addQuestion;
+export default addAnswer;
