@@ -100,7 +100,9 @@ export default class Test extends Component{
                             >
                                 Questão {(key+1).toString()}
                             </Menu.Item>
-                            <Button icon='trash' color='red' onClick={this.deleteQuestion}/>
+                            <div>
+                                <Button circular icon='trash' color='red' onClick={this.deleteQuestion}/>
+                            </div>
                         </Menu.Menu>                        
                     ))}
 

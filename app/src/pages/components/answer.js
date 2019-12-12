@@ -1,12 +1,13 @@
 import React from 'react'
-import {Card, Checkbox} from 'semantic-ui-react'
+import {Card, Checkbox, Button} from 'semantic-ui-react'
 
 import AnswerQuery from '../../relay/queries/answer';
 import addAnswer from '../../relay/mutations/addAnswer'
 import deleteAnswer from '../../relay/mutations/deleteAnswer'
 //import updateAnswer from '../../relay/mutations/updateAnswer'
 
-import QuestionInput from './question/input';
+//import QuestionInput from './question/input';
+import AnswerInput from './answer/input'
 
 import './answer.css'
 
@@ -68,22 +69,23 @@ export default class Answer {
 		if(this.id !== null) {deleteAnswer(this.id)}
     }
 
-    update = async (newText) => {
+    update = async (newText,newCorrectness) => {
         // update question locally and from server
 		this.text = newText
-		//this.isCorrect = newRightness
+		this.isCorrect = newCorrectness
 		
 		this.reRender()
 		
 	}
 	
-	edit = (values) => {
+	edit = (text,isCorrect) => {
 		
 		if(this.id === null){
-			this.text = values;
+			this.text = text;
+			this.isCorrect = isCorrect;
 			this.add();	
 		}else{
-			this.update(values);
+			this.update(text,isCorrect);
 		}
 		this.editing=false;
 		this.reRender()
@@ -94,18 +96,21 @@ export default class Answer {
 		var display = '';
 		if(this.editing){
 			display = () => (
-				<QuestionInput
-					placeholder='Adicionar Resposta'
-					value={this.text}
-					onClick={this.edit}
-				/>
+				<div className='answer'>
+					<AnswerInput
+						placeholder='Adicionar Resposta'
+						value={this.text}
+						onClick={this.edit}
+					/>
+				</div>
 			)
 		}else{
 			display = () => (
 				<div className='card'>
 					<Card
 						fluid
-							description={this.text}
+						description={this.text}
+						color={this.isCorrect?'green':'red'}
 					/>
 				</div>
 			)

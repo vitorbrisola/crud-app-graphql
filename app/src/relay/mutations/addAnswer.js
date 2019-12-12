@@ -26,7 +26,7 @@ const addAnswer = async (text,isCorrect) => {
           mutation,
           variables,
           onCompleted: (res) => {resolve(res)},
-          onError: (err) => {console.log(err)},
+          onError: (err) => {reject(err)},
         })
     })  
 } 
