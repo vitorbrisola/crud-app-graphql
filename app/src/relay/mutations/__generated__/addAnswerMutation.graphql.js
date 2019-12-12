@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash f94ef89b5159e27d1aeef809d3a5a861
+ * @relayHash 32a4346ab03197d6825238f92078b94a
  */
 
 /* eslint-disable */
@@ -9,31 +9,30 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type upQuestionInput = {|
-  id: string,
-  description: string,
-  answers: $ReadOnlyArray<?string>,
+export type addAnswerInput = {|
+  text: string,
+  isCorrect: boolean,
 |};
-export type updateQuestionMutationVariables = {|
-  input: upQuestionInput
+export type addAnswerMutationVariables = {|
+  input: addAnswerInput
 |};
-export type updateQuestionMutationResponse = {|
-  +updateQuestion: ?{|
+export type addAnswerMutationResponse = {|
+  +addAnswer: ?{|
     +id: string
   |}
 |};
-export type updateQuestionMutation = {|
-  variables: updateQuestionMutationVariables,
-  response: updateQuestionMutationResponse,
+export type addAnswerMutation = {|
+  variables: addAnswerMutationVariables,
+  response: addAnswerMutationResponse,
 |};
 */
 
 
 /*
-mutation updateQuestionMutation(
-  $input: upQuestionInput!
+mutation addAnswerMutation(
+  $input: addAnswerInput!
 ) {
-  updateQuestion(input: $input) {
+  addAnswer(input: $input) {
     id
   }
 }
@@ -44,7 +43,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "input",
-    "type": "upQuestionInput!",
+    "type": "addAnswerInput!",
     "defaultValue": null
   }
 ],
@@ -52,7 +51,7 @@ v1 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "updateQuestion",
+    "name": "addAnswer",
     "storageKey": null,
     "args": [
       {
@@ -61,7 +60,7 @@ v1 = [
         "variableName": "input"
       }
     ],
-    "concreteType": "Question",
+    "concreteType": "Answer",
     "plural": false,
     "selections": [
       {
@@ -78,7 +77,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "updateQuestionMutation",
+    "name": "addAnswerMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -86,19 +85,19 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "updateQuestionMutation",
+    "name": "addAnswerMutation",
     "argumentDefinitions": (v0/*: any*/),
     "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "mutation",
-    "name": "updateQuestionMutation",
+    "name": "addAnswerMutation",
     "id": null,
-    "text": "mutation updateQuestionMutation(\n  $input: upQuestionInput!\n) {\n  updateQuestion(input: $input) {\n    id\n  }\n}\n",
+    "text": "mutation addAnswerMutation(\n  $input: addAnswerInput!\n) {\n  addAnswer(input: $input) {\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'ceea4f09cab9f01e25aaace959ad0620';
+(node/*: any*/).hash = 'ccc5d9ec166e567a6ddb9ff53164d48e';
 module.exports = node;

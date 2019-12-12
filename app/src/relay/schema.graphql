@@ -11,21 +11,26 @@ type Query {
 }
 
 type Mutation {
-    addAnswer(input: answerInput!): Answer
+    addAnswer(input: addAnswerInput!): Answer
     deleteAnswer(id: String!): Answer
-    updateAnswer(input: answerInput!): Answer
+    updateAnswer(input: upAnswerInput!): Answer
 
-    addQuestion(input: questionInput!): Question
+    addQuestion(input: addQuestionInput!): Question
     deleteQuestion(id: String!): Question
-    updateQuestion(input: questionInput!): Question
+    updateQuestion(input: upQuestionInput!): Question
 
-    addTest(input: testInput!): Test
+    addTest(input: addTestInput!): Test
     deleteTest(id: String!): Test
-    updateTest(input: testInput!): Test
+    updateTest(input: upTestInput!): Test
     
 }
 
-input answerInput {
+input addAnswerInput {
+    text: String!
+    isCorrect: Boolean!
+}
+
+input upAnswerInput {
     id: String!
     text: String!
     isCorrect: Boolean!
@@ -33,12 +38,16 @@ input answerInput {
 
 type Answer {
     id: ID!
-    description: String
+    text: String
     isCorrect: Boolean!
 }
 
+input addQuestionInput {
+    description: String!
+    answers: [String]!
+}
 
-input questionInput {
+input upQuestionInput {
     id: String!
     description: String!
     answers: [String]!
@@ -50,7 +59,11 @@ type Question {
     answers: [String]
 }
 
-input testInput {
+input addTestInput {
+    questions: [String]!
+}
+
+input upTestInput {
     id: String!
     questions: [String]!
 }

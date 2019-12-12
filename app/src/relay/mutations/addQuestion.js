@@ -3,8 +3,8 @@ import {commitMutation} from 'relay-runtime';
 import environment from "../Environment";
 
 const mutation = graphql`
-  mutation addQuestionMutation($input: questionInput! ) {
-    addQuestion(description: $input) {
+  mutation addQuestionMutation($input: addQuestionInput! ) {
+    addQuestion(input: $input) {
       id
     }  
   }

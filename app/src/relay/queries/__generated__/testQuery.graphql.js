@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash dba1de863a83e5df81870de1498b3827
+ * @relayHash bc521ea4094a44a8cf52f1707d8c6edf
  */
 
 /* eslint-disable */
@@ -9,29 +9,27 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type questionQueryVariables = {|
+export type testQueryVariables = {|
   input: string
 |};
-export type questionQueryResponse = {|
-  +question: ?{|
-    +description: ?string,
-    +answers: ?$ReadOnlyArray<?string>,
+export type testQueryResponse = {|
+  +test: ?{|
+    +questions: ?$ReadOnlyArray<?string>
   |}
 |};
-export type questionQuery = {|
-  variables: questionQueryVariables,
-  response: questionQueryResponse,
+export type testQuery = {|
+  variables: testQueryVariables,
+  response: testQueryResponse,
 |};
 */
 
 
 /*
-query questionQuery(
+query testQuery(
   $input: ID!
 ) {
-  question(id: $input) {
-    description
-    answers
+  test(id: $input) {
+    questions
     id
   }
 }
@@ -56,14 +54,7 @@ v1 = [
 v2 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "description",
-  "args": null,
-  "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "answers",
+  "name": "questions",
   "args": null,
   "storageKey": null
 };
@@ -71,7 +62,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "questionQuery",
+    "name": "testQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -79,34 +70,32 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "question",
+        "name": "test",
         "storageKey": null,
         "args": (v1/*: any*/),
-        "concreteType": "Question",
+        "concreteType": "Test",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/)
+          (v2/*: any*/)
         ]
       }
     ]
   },
   "operation": {
     "kind": "Operation",
-    "name": "questionQuery",
+    "name": "testQuery",
     "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "question",
+        "name": "test",
         "storageKey": null,
         "args": (v1/*: any*/),
-        "concreteType": "Question",
+        "concreteType": "Test",
         "plural": false,
         "selections": [
           (v2/*: any*/),
-          (v3/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
@@ -120,13 +109,13 @@ return {
   },
   "params": {
     "operationKind": "query",
-    "name": "questionQuery",
+    "name": "testQuery",
     "id": null,
-    "text": "query questionQuery(\n  $input: ID!\n) {\n  question(id: $input) {\n    description\n    answers\n    id\n  }\n}\n",
+    "text": "query testQuery(\n  $input: ID!\n) {\n  test(id: $input) {\n    questions\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '67ab553e0e636635b74e89c4f25c5a04';
+(node/*: any*/).hash = '84cad6f95002fba19a4aae28d1f3cc05';
 module.exports = node;

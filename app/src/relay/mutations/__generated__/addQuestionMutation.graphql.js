@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash ce6ff66a225e2336effea897ec02257e
+ * @relayHash 8a1c456b741f22eefb37aacc894515f8
  */
 
 /* eslint-disable */
@@ -9,8 +9,12 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
+export type addQuestionInput = {|
+  description: string,
+  answers: $ReadOnlyArray<?string>,
+|};
 export type addQuestionMutationVariables = {|
-  input: string
+  input: addQuestionInput
 |};
 export type addQuestionMutationResponse = {|
   +addQuestion: ?{|
@@ -26,9 +30,9 @@ export type addQuestionMutation = {|
 
 /*
 mutation addQuestionMutation(
-  $input: String!
+  $input: addQuestionInput!
 ) {
-  addQuestion(description: $input) {
+  addQuestion(input: $input) {
     id
   }
 }
@@ -39,7 +43,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "input",
-    "type": "String!",
+    "type": "addQuestionInput!",
     "defaultValue": null
   }
 ],
@@ -52,7 +56,7 @@ v1 = [
     "args": [
       {
         "kind": "Variable",
-        "name": "description",
+        "name": "input",
         "variableName": "input"
       }
     ],
@@ -89,11 +93,11 @@ return {
     "operationKind": "mutation",
     "name": "addQuestionMutation",
     "id": null,
-    "text": "mutation addQuestionMutation(\n  $input: String!\n) {\n  addQuestion(description: $input) {\n    id\n  }\n}\n",
+    "text": "mutation addQuestionMutation(\n  $input: addQuestionInput!\n) {\n  addQuestion(input: $input) {\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'bee66b8e488fc8ca65323dbc32a7c224';
+(node/*: any*/).hash = '51bb7140965daeaca6b477f9f9e12f70';
 module.exports = node;

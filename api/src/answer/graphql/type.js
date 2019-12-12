@@ -12,7 +12,7 @@ exports.addInput = new GraphQLInputObjectType({
         text: {
             type: new GraphQLNonNull(GraphQLString),
         },
-        isRight: {        
+        isCorrect: {        
             type: new GraphQLNonNull(GraphQLBoolean),    
         }  
     })
@@ -27,7 +27,7 @@ exports.upInput = new GraphQLInputObjectType({
         text: {
             type: new GraphQLNonNull(GraphQLString),
         },
-        isRight: {        
+        isCorrect: {        
             type: new GraphQLNonNull(GraphQLBoolean),    
         }  
     })

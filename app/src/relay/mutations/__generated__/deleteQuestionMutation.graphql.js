@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash fa9e24bcc5e401898105edd1d386e740
+ * @relayHash d815e7203a7a027d9a6a451e5f9a3432
  */
 
 /* eslint-disable */
@@ -14,8 +14,7 @@ export type deleteQuestionMutationVariables = {|
 |};
 export type deleteQuestionMutationResponse = {|
   +deleteQuestion: ?{|
-    +id: string,
-    +description: ?string,
+    +id: string
   |}
 |};
 export type deleteQuestionMutation = {|
@@ -31,7 +30,6 @@ mutation deleteQuestionMutation(
 ) {
   deleteQuestion(id: $input) {
     id
-    description
   }
 }
 */
@@ -67,13 +65,6 @@ v1 = [
         "name": "id",
         "args": null,
         "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "description",
-        "args": null,
-        "storageKey": null
       }
     ]
   }
@@ -98,11 +89,11 @@ return {
     "operationKind": "mutation",
     "name": "deleteQuestionMutation",
     "id": null,
-    "text": "mutation deleteQuestionMutation(\n  $input: String!\n) {\n  deleteQuestion(id: $input) {\n    id\n    description\n  }\n}\n",
+    "text": "mutation deleteQuestionMutation(\n  $input: String!\n) {\n  deleteQuestion(id: $input) {\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '437a5a5e11fa9682c0418f0291f21348';
+(node/*: any*/).hash = 'e43c4ddc40b0d78d1d331a8ff0698d14';
 module.exports = node;

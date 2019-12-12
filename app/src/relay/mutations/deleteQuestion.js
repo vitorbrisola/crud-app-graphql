@@ -6,7 +6,6 @@ const mutation = graphql`
   mutation deleteQuestionMutation($input: String! ) {
     deleteQuestion(id: $input) {
       id
-      description
     }  
   }
 `;
