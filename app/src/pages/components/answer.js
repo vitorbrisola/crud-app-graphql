@@ -4,7 +4,7 @@ import {Card, Checkbox, Button} from 'semantic-ui-react'
 import AnswerQuery from '../../relay/queries/answer';
 import addAnswer from '../../relay/mutations/addAnswer'
 import deleteAnswer from '../../relay/mutations/deleteAnswer'
-//import updateAnswer from '../../relay/mutations/updateAnswer'
+import updateAnswer from '../../relay/mutations/updateAnswer'
 
 //import QuestionInput from './question/input';
 import AnswerInput from './answer/input'
@@ -71,23 +71,24 @@ export default class Answer {
 		if(this.id !== null) {deleteAnswer(this.id)}
     }
 
-    update = async (newText,newCorrectness) => {
-        // update question locally and from server
-		this.text = newText
-		this.isCorrect = newCorrectness
+    update = async () => {
+        // update question locally and from server		
+		await updateAnswer(this.id,this.text,this.isCorrect)
+			.then(res => { 
+				this.reRender()
+			})
 		
-		this.reRender()
 		
 	}
 	
 	edit = (text,isCorrect) => {
+		this.text = text;
+		this.isCorrect = isCorrect;
 		
 		if(this.id === null){
-			this.text = text;
-			this.isCorrect = isCorrect;
 			this.add();	
 		}else{
-			this.update(text,isCorrect);
+			this.update();
 		}
 		this.editing=false;
 		this.reRender()
@@ -116,6 +117,9 @@ export default class Answer {
 					/>
                     <div className='delete'>
                         <Button circular icon='trash' color='red' onClick={this.delete}/>
+                    </div>
+					<div className='delete'>
+                        <Button circular icon='pencil' color='blue' onClick={()=>{this.editing=true;this.reRender()}}/>
                     </div>
 				</div>
 			)
