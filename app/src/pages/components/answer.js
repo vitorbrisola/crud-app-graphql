@@ -13,7 +13,7 @@ import './answer.css'
 
 export default class Answer {
 
-    constructor({id = null, text = '', isCorrect = false,reRender=null,onAdd=null}){
+    constructor({id = null, text = '', isCorrect = false,reRender=null,onAdd=null,onDelete=null}){
 
 		// answer data
         this.id = id
@@ -24,6 +24,7 @@ export default class Answer {
 		this.editing = false
 		this.parentReRender = reRender;
 		this.parentOnAdd = onAdd;
+		this.parentOnDelete = onDelete;
 
 		// constructor options
 		if(id === null && text === ''){
@@ -66,6 +67,7 @@ export default class Answer {
 
     delete = () => {
 		// delete answer from server
+		if(this.parentOnDelete !== null)this.parentOnDelete(this.id)
 		if(this.id !== null) {deleteAnswer(this.id)}
     }
 
@@ -112,6 +114,9 @@ export default class Answer {
 						description={this.text}
 						color={this.isCorrect?'green':'red'}
 					/>
+                    <div className='delete'>
+                        <Button circular icon='trash' color='red' onClick={this.delete}/>
+                    </div>
 				</div>
 			)
 		}

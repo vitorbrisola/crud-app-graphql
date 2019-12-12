@@ -22,4 +22,10 @@ body {
 
 .card {
     padding: 0px;
+    display: flex;
+    flex-direction: row;
+}
+
+.delete {
+    padding: 5px;
 }

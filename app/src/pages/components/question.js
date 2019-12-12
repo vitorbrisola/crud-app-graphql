@@ -49,7 +49,8 @@ export default class Question {
                     this.answers.push(new Answer(
                         {id:answer,
                         reRender:this.reRender,
-                        onAdd:this.addAnswer}))
+                        onAdd:this.addAnswer,
+                        onDelete:this.deleteAnswer}))
                 }
                 this.setNewEmptyAnswer()
                 //state management
@@ -113,7 +114,7 @@ export default class Question {
     }
 
     setNewEmptyAnswer = () => {
-        this.answers.push(new Answer({reRender:this.reRender,onAdd:this.addAnswer}));
+        this.answers.push(new Answer({reRender:this.reRender,onAdd:this.addAnswer,onDelete:this.deleteAnswer}));
         this.reRender()
     }
 
@@ -122,6 +123,15 @@ export default class Question {
         await this.update()
             .then(res =>{
                 this.setNewEmptyAnswer()
+            })
+    }
+
+    deleteAnswer = async (id) => {
+        var index = this.answers.findIndex((answer) =>{return (answer.id === id)})
+        this.answers.splice(index,1)
+        await this.update()
+            .then(res =>{
+                this.reRender()
             })
     }
 
@@ -152,7 +162,7 @@ export default class Question {
                         {this.answers.map((item,key) => {
                             return (
                                 <div key={key} className='answers'>
-                                    {item.render()}
+                                    {item.render()}                                 
                                 </div>)
                         })}
                     </div>
