@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 30d0c5d0d9e38b92ab19550ecb544dd9
+ * @relayHash b18cce24ec690351e134bcc70ab339a5
  */
 
 /* eslint-disable */
@@ -12,6 +12,7 @@ import type { ConcreteRequest } from 'relay-runtime';
 export type updateQuestionInput = {|
   id: string,
   description: string,
+  answers: $ReadOnlyArray<?string>,
 |};
 export type updateQuestionMutationVariables = {|
   input: updateQuestionInput

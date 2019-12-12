@@ -9,11 +9,14 @@ type Mutation {
     addQuestion(description: String!): Question
     deleteQuestion(id: String!): Question
     updateQuestion(input: updateQuestionInput!): Question
+
+    
 }
 
 input updateQuestionInput {
     id: String!
     description: String!
+    answers: [String]!
 }
 
 type Question {

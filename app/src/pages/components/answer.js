@@ -45,6 +45,7 @@ export default class Answer {
 
     add = async () => {
 		// add answer to server 
+		this.id = 1;
 		if(this.parentOnAdd !== null){this.parentOnAdd()}
     }
 
@@ -70,13 +71,13 @@ export default class Answer {
 		}else{
 			this.update(values);
 		}
-		this.editing=false
+		this.editing=false;
 		this.reRender()
 		
 	}
 
     render = () => {
-		var display = ''
+		var display = '';
 		if(this.editing){
 			display = () => (
 				<QuestionInput

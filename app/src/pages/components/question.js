@@ -62,6 +62,12 @@ export default class Question {
     delete = async () => {
         // delete question from server based on its id
         if(this.isOnServer){
+            // erase all answers
+            while(this.answers.length > 0){
+                const answer = this.answers.pop()
+                answer.delete()
+            }
+            // erase question
             await deleteQuestion(this.id)
         }
     }
@@ -69,7 +75,11 @@ export default class Question {
     update = async (newDescription) => {
         // update question locally and from server
         this.description = newDescription
-        await updateQuestion(this.id,newDescription)
+        const answersIds = []
+        for(var answer of this.answers){
+            if(answer.id !== null)answersIds.push(answer.id)
+        }
+        await updateQuestion(this.id,this.description,answersIds)
     }
 
     edit = (values) => {

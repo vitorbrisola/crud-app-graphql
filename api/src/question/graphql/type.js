@@ -14,6 +14,9 @@ exports.updateInput = new GraphQLInputObjectType({
                 },
                 description: {
                     type: new GraphQLNonNull(GraphQLString),
+                },
+                answers: {
+                    type: new GraphQLList(GraphQLString),
                 }
             })
  	})

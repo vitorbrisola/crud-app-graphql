@@ -11,11 +11,12 @@ const mutation = graphql`
 `;
 
 
-const updateQuestion = async (id,description) => {
+const updateQuestion = async (id,description,answers) => {
     const variables = {
       input:{
         id,
-        description
+        description,
+        answers
       }
     }
 
