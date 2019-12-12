@@ -17,3 +17,8 @@ body {
 .qInput {
     margin-top: 20px;
 }
+
+.addAnswer {
+    display: flex;
+    justify-content: center;
+}

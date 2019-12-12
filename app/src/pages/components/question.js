@@ -15,13 +15,15 @@ export default class Question {
 
     constructor({id, description = null,reRender=null}){
 
+        // question data
         this.id = id
         this.description = (description === null)?'':description;
-        this.answers = [new Answer(this.deleteAnswer)];
+        this.answers = [new Answer({reRender:this.reRender,onAdd:this.addAnswer})];
+        // state management
 	    this.editing = false;
         this.isOnServer = false;
         this.fatherReRender = reRender;
-
+        // object monting
         if(id !== null && description === null){            
             this.load()
         }else if(id === null && description !== null){
@@ -71,6 +73,7 @@ export default class Question {
     }
 
     edit = (values) => {
+        // edit questing adding or updating to server
         if(this.isOnServer){
             this.update(values)
         }else{
@@ -81,25 +84,15 @@ export default class Question {
         this.reRender();
     }
 
-    getData(){return({
-        id: this.id,
-        description: this.description
-    })}
-
-
     setNewEmptyAnswer = () => {
-        this.answers.push(new Answer(this.deleteAnswer));
+        
     }
 
     addAnswer = () => {
-        this.setNewEmptyAnswer()
+        console.log('test')
+        this.answers.push(new Answer({reRender:this.reRender,onAdd:this.addAnswer}));
+        this.reRender()
     }
-
-    deleteAnswer = () => {
-
-    }
-
-
 
     render = (index) => {
         var display = () => (<div>Loading...</div>)
@@ -128,7 +121,7 @@ export default class Question {
                         {this.answers.map((item,key) => {
                             return (
                                 <div key={key} className='answers'>
-                                    {item.render(key,this.addAnswer)}
+                                    {item.render()}
                                 </div>)
                         })}
                     </div>

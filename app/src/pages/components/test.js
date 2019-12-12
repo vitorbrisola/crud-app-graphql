@@ -14,8 +14,6 @@ export default class Test extends Component{
         this.state = {
             questions: [],
             curIndex: 0,
-            questDisplayMode: 'add',
-            deleteCounter: 0,
             renderCounter: 0
         }
     }
@@ -52,7 +50,7 @@ export default class Test extends Component{
         const array = [...this.state.questions]
         const index = array.length
         this.setState({questions:[...array,newQuestion],curIndex:index})
-        //this.setState({questDisplayMode:'normal'})
+        
     }
 
     deleteQuestion = async () => {
