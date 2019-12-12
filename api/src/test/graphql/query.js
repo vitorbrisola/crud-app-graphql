@@ -5,7 +5,7 @@ var GraphQLNonNull = require('graphql').GraphQLNonNull;
 var Model = require('../mongodb/schema');
 var Type = require('./type').Type;
 
-const questions = {
+const tests = {
   type: new GraphQLList(Type),
   resolve:  async ()=> {
     const quests = await Model.find()
@@ -16,7 +16,7 @@ const questions = {
   }
 }
 
-const question = {
+const test = {
   type: Type,
   args: {
     id: {
@@ -33,6 +33,6 @@ const question = {
 }
 
 module.exports = {
-  questions,
-  question
+  tests,
+  test
 }

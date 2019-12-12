@@ -1,26 +1,22 @@
 var GraphQLNonNull = require('graphql').GraphQLNonNull;
-var GraphQLString = require('graphql').GraphQLString;
-var GraphQLBoolean = require('graphql').GraphQLBoolean;
 
 var Model = require('../mongodb/schema');
 var Type = require('./type').Type;
+var InputType = require('./type').Input;
 
 exports.add = {
   type: Type,
 
   args: {
-    text: {
-      type: new GraphQLNonNull(GraphQLString),
-    },
-    isRight: {
-      type: new GraphQLNonNull(GraphQLBoolean),
+    input: {            
+      type: new GraphQLNonNull(InputType)
     }
   },
   
   resolve: async(root, args)=> { 
     
     //under the resolve method we get our arguments
-    const dataModel = new Model(args);
+    const dataModel = new Model(args.input);
     const newData = await dataModel.save();
     if (!newData) {
       throw new Error('error');

@@ -8,27 +8,23 @@ var GraphQLList = require('graphql').GraphQLList;
 
 
 exports.Input = new GraphQLInputObjectType({
-            name:'questionInput',
+            name:'testInput',
             fields: () => ({
                 id: {            
                     type: new GraphQLNonNull(GraphQLString)
                 },
-                description: {
-                    type: new GraphQLNonNull(GraphQLString),
-                },
-                answers: {
+                questions: {
                     type: new GraphQLList(GraphQLString),
                 }
             })
  	})
 
 exports.Type = new GraphQLObjectType({
-    name: 'question',
+    name: 'test',
     fields:  () =>{
         return {
             id: {       type: new GraphQLNonNull(GraphQLID)     },      
-            description: {        type: GraphQLString      },  
-            answers: {        type: new GraphQLList(GraphQLString)     }        
+            questions: {        type: new GraphQLList(GraphQLString)     }        
         }
     }
 });

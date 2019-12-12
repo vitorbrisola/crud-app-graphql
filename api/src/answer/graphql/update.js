@@ -4,22 +4,17 @@ var GraphQLBoolean = require('graphql').GraphQLBoolean;
 
 var Model = require('../mongodb/schema');
 var Type = require('./type').Type;
+var InputType = require('./type').Input;
 
 exports.update = {
     type: Type,
     args: {
-        id: {            
-            type: new GraphQLNonNull(GraphQLString)
-        },
-        text: {
-            type: new GraphQLNonNull(GraphQLString),
-        },
-        isRight: {        
-            type: new GraphQLNonNull(GraphQLBoolean),    
+        input: {            
+            type: new GraphQLNonNull(InputType)
         }
     },
     resolve: async(root, args) =>{        
-        const UpdatedObj = await Model.findByIdAndUpdate(args.id,args);
+        const UpdatedObj = await Model.findByIdAndUpdate(args.input.id,args.input);
         if (!UpdatedObj) {
           throw new Error('Error')
         }

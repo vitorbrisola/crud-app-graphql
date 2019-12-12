@@ -6,7 +6,7 @@ var Schema = new mongoose.Schema({
     type: String,
     required: true
   },
-  isRight: {
+  isCorrect: {
     type: Boolean,
     required: true
   }
