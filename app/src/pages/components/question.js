@@ -18,20 +18,21 @@ export default class Question {
         // question data
         this.id = id
         this.description = (description === null)?'':description;
-        this.answers = [new Answer({reRender:this.reRender,onAdd:this.addAnswer})];
+        this.answers = [];
         // state management
 	    this.editing = false;
         this.isOnServer = false;
         this.fatherReRender = reRender;
         // object monting
         if(id !== null && description === null){            
-            this.load()
+            this.load() 
         }else if(id === null && description !== null){
             this.add()
         }else if(id === null && description === null){
 	        this.editing = true;
 	    }
 
+        
     }
 
     reRender = () => {
@@ -42,7 +43,18 @@ export default class Question {
         // get question data from server, based on the data id
         await QuestionQuery(this.id)
             .then(data => {
+                //data saving
+                console.log(data.question.answers)
                 this.description = data.question.description;
+                for(var answer of data.question.answers){
+                    console.log(answer)
+                    this.answers.push(new Answer(
+                        {id:answer,
+                        reRender:this.reRender,
+                        onAdd:this.addAnswer}))
+                }
+                this.setNewEmptyAnswer()
+                //state management
                 this.isOnServer = true;
                 this.reRender()
             })
@@ -51,10 +63,14 @@ export default class Question {
 
     add = async () => {
         // add question on server based on its description and answers
-        
-        await addQuestion(this.description)
+        const answersIds = []
+        for(var answer of this.answers){
+            if(answer.id !== null)answersIds.push(answer.id)
+        }
+        await addQuestion(this.description,answersIds)
             .then(res => {
                 this.id = res.addQuestion.id;
+                this.setNewEmptyAnswer()
                 this.isOnServer = true;
             })
     }
@@ -74,12 +90,12 @@ export default class Question {
 
     update = async (newDescription) => {
         // update question locally and from server
-        this.description = newDescription
+        if(newDescription) this.description = newDescription
         const answersIds = []
         for(var answer of this.answers){
-            if(answer.id !== null)answersIds.push(answer.id)
+            if(answer.id !== null)answersIds.push(answer.id.toString())
         }
-        await updateQuestion(this.id,this.description,answersIds)
+        await updateQuestion(this.id.toString(),this.description,answersIds)
     }
 
     edit = (values) => {
@@ -95,13 +111,14 @@ export default class Question {
     }
 
     setNewEmptyAnswer = () => {
-        
-    }
-
-    addAnswer = () => {
-        console.log('test')
         this.answers.push(new Answer({reRender:this.reRender,onAdd:this.addAnswer}));
         this.reRender()
+    }
+
+    addAnswer = async () => {
+        // is now that new answers will always be the last one
+        await this.update()
+        this.reRender() 
     }
 
     render = (index) => {

@@ -3,7 +3,7 @@ import {commitMutation} from 'relay-runtime';
 import environment from "../Environment";
 
 const mutation = graphql`
-  mutation deleteTestMutation($input: String! ) {
+  mutation deleteTestMutation($input: ID! ) {
     deleteTest(id: $input) {
       id
     }  

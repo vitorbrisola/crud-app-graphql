@@ -1,10 +1,10 @@
 import React from 'react'
-import {Card, Button,Checkbox} from 'semantic-ui-react'
+import {Card, Checkbox} from 'semantic-ui-react'
 
-//import QuestionQuery from '../../relay/queries/question';
-//import addQuestion from '../../relay/mutations/addQuestion'
-//import deleteQuestion from '../../relay/mutations/deleteQuestion'
-//import updateQuestion from '../../relay/mutations/updateQuestion'
+import AnswerQuery from '../../relay/queries/answer';
+import addAnswer from '../../relay/mutations/addAnswer'
+import deleteAnswer from '../../relay/mutations/deleteAnswer'
+//import updateAnswer from '../../relay/mutations/updateAnswer'
 
 import QuestionInput from './question/input';
 
@@ -12,18 +12,19 @@ import './answer.css'
 
 export default class Answer {
 
-    constructor({id = null, text = '', isRight = false,reRender=null,onAdd=null}){
+    constructor({id = null, text = '', isCorrect = false,reRender=null,onAdd=null}){
 
 		// answer data
         this.id = id
         this.text = text;
-		this.isRight = isRight;
+		this.isCorrect = isCorrect;
 		
 		// state management
 		this.editing = false
 		this.parentReRender = reRender;
 		this.parentOnAdd = onAdd;
 
+		console.log(`id: ${id}, text: ${text}`)
 		// constructor options
 		if(id === null && text === ''){
 			this.editing = true;
@@ -40,13 +41,28 @@ export default class Answer {
 	}
 
     load = async () => {
-        // get answer data from server
+		console.log('load: '+this.id)
+		// get answer data from server
+		await AnswerQuery(this.id)
+			.then(data => {
+				//data saving
+				this.text = data.answer.text;
+				this.isCorrect = data.answer.isCorrect;
+				//state management
+				this.isOnServer = true;
+				this.reRender()
+			})
+		.catch(err => console.log(err.message))
     }
 
     add = async () => {
 		// add answer to server 
-		this.id = 1;
-		if(this.parentOnAdd !== null){this.parentOnAdd()}
+		await addAnswer(this.text,this.isCorrect)
+			.then(res => {
+				this.id = res.addAnswer.id;
+				this.isOnServer = true;
+				if(this.parentOnAdd !== null){this.parentOnAdd()}
+			})
     }
 
     delete = async () => {
@@ -57,7 +73,7 @@ export default class Answer {
     update = async (newText) => {
         // update question locally and from server
 		this.text = newText
-		//this.isRight = newRightness
+		//this.isCorrect = newRightness
 		
 		this.reRender()
 		

@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Card,Icon, Menu,Button} from 'semantic-ui-react';
+import {Icon, Menu,Button} from 'semantic-ui-react';
 import './test.css'
 
 import Question from './question'

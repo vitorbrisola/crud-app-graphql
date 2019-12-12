@@ -12,7 +12,7 @@ exports.addInput = new GraphQLInputObjectType({
             type: new GraphQLNonNull(GraphQLString),
         },
         answers: {
-            type: new GraphQLList(GraphQLString),
+            type: new GraphQLList(GraphQLID),
         }
     })
 })
@@ -22,13 +22,13 @@ exports.upInput = new GraphQLInputObjectType({
             name:'upQuestionInput',
             fields: () => ({
                 id: {            
-                    type: new GraphQLNonNull(GraphQLString)
+                    type: new GraphQLNonNull(GraphQLID)
                 },
                 description: {
                     type: new GraphQLNonNull(GraphQLString),
                 },
                 answers: {
-                    type: new GraphQLList(GraphQLString),
+                    type: new GraphQLList(GraphQLID),
                 }
             })
  	})
@@ -39,7 +39,7 @@ exports.Type = new GraphQLObjectType({
         return {
             id: {       type: new GraphQLNonNull(GraphQLID)     },      
             description: {        type: GraphQLString      },  
-            answers: {        type: new GraphQLList(GraphQLString)     }        
+            answers: {        type: new GraphQLList(GraphQLID)     }        
         }
     }
 });

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash d815e7203a7a027d9a6a451e5f9a3432
+ * @relayHash 109df28a48b8282f844e14da2c2f67e5
  */
 
 /* eslint-disable */
@@ -26,7 +26,7 @@ export type deleteQuestionMutation = {|
 
 /*
 mutation deleteQuestionMutation(
-  $input: String!
+  $input: ID!
 ) {
   deleteQuestion(id: $input) {
     id
@@ -39,7 +39,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "input",
-    "type": "String!",
+    "type": "ID!",
     "defaultValue": null
   }
 ],
@@ -89,11 +89,11 @@ return {
     "operationKind": "mutation",
     "name": "deleteQuestionMutation",
     "id": null,
-    "text": "mutation deleteQuestionMutation(\n  $input: String!\n) {\n  deleteQuestion(id: $input) {\n    id\n  }\n}\n",
+    "text": "mutation deleteQuestionMutation(\n  $input: ID!\n) {\n  deleteQuestion(id: $input) {\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'e43c4ddc40b0d78d1d331a8ff0698d14';
+(node/*: any*/).hash = '9a17512618c31249149ba4296ca33a47';
 module.exports = node;

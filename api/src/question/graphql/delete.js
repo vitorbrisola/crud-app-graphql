@@ -1,5 +1,5 @@
 var GraphQLNonNull = require('graphql').GraphQLNonNull;
-var GraphQLString = require('graphql').GraphQLString;
+var GraphQLID = require('graphql').GraphQLID;
 
 
 var Model = require('../mongodb/schema');
@@ -10,7 +10,7 @@ exports.remove = {
   type: Type,
   args: {
     id: {
-      type: new GraphQLNonNull(GraphQLString)
+      type: new GraphQLNonNull(GraphQLID)
     }
   },
   resolve: async(root, args)=> {

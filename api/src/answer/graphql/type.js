@@ -22,7 +22,7 @@ exports.upInput = new GraphQLInputObjectType({
     name:'upAnswerInput',
     fields: () => ({
         id: {            
-            type: new GraphQLNonNull(GraphQLString)
+            type: new GraphQLNonNull(GraphQLID)
         },
         text: {
             type: new GraphQLNonNull(GraphQLString),
@@ -39,7 +39,7 @@ exports.Type = new GraphQLObjectType({
         return {
             id: {       type: new GraphQLNonNull(GraphQLID)     },      
             text: {        type: GraphQLString      },  
-            isRight: {        type: GraphQLBoolean     },   
+            isCorrect: {        type: GraphQLBoolean     },   
         }
     }
 });
